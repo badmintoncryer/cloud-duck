@@ -1,5 +1,6 @@
 {
   "name": "cloud-duck",
+  "description": "CDK construct for creating an analysis environment using DuckDB for S3 data",
   "repository": {
     "type": "git",
     "url": "https://github.com/malaysia.cryer/cloud-duck.git"
@@ -17,6 +18,7 @@
     "package": "npx projen package",
     "package-all": "npx projen package-all",
     "package:js": "npx projen package:js",
+    "package:python": "npx projen package:python",
     "post-compile": "npx projen post-compile",
     "post-upgrade": "npx projen post-upgrade",
     "pre-compile": "npx projen pre-compile",
@@ -34,14 +36,19 @@
     "organization": false
   },
   "devDependencies": {
+    "@aws-cdk/integ-runner": "2.160.0-alpha.0",
+    "@aws-cdk/integ-tests-alpha": "2.160.0-alpha.0",
+    "@aws-sdk/client-s3": "^3.715.0",
     "@stylistic/eslint-plugin": "^2",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.10.2",
     "@typescript-eslint/eslint-plugin": "^8",
     "@typescript-eslint/parser": "^8",
-    "aws-cdk-lib": "2.1.0",
+    "aws-cdk-lib": "2.160.0",
+    "aws-lambda": "^1.0.7",
     "commit-and-tag-version": "^12",
     "constructs": "10.0.5",
+    "duckdb": "^1.1.3",
     "eslint": "^9",
     "eslint-import-resolver-typescript": "^3.7.0",
     "eslint-plugin-import": "^2.31.0",
@@ -58,11 +65,18 @@
     "typescript": "^5.7.2"
   },
   "peerDependencies": {
-    "aws-cdk-lib": "^2.1.0",
+    "aws-cdk-lib": "^2.160.0",
     "constructs": "^10.0.5"
   },
+  "dependencies": {
+    "deploy-time-build": "^0.3.23"
+  },
   "keywords": [
-    "cdk"
+    "aws",
+    "cdk",
+    "cognito",
+    "duckdb",
+    "s3"
   ],
   "main": "lib/index.js",
   "license": "Apache-2.0",
@@ -119,7 +133,12 @@
   "stability": "stable",
   "jsii": {
     "outdir": "dist",
-    "targets": {},
+    "targets": {
+      "python": {
+        "distName": "cloud-duck",
+        "module": "cloud-duck"
+      }
+    },
     "tsc": {
       "outDir": "lib",
       "rootDir": "src"
