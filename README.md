@@ -37,3 +37,18 @@ new CloudDuck(this, 'CloudDuck', {
 
 ### Add user to the Cognito User Pool
 
+Add user to the Cognito User Pool to access the CloudDuck.
+
+### Access
+
+Access to the CloudDuck with the cloudfront URL.
+
+```bash
+❯ npx cdk deploy
+...
+AwsStack.CloudDuckDistributionUrl84FC8296 = https://dosjykpv096qr.cloudfront.net
+Stack ARN:
+arn:aws:cloudformation:us-east-1:123456789012:stack/AwsStack/dd0960c0-b3d5-11ef-bcfc-12cf7722116f
+
+✨  Total time: 73.59s
+```
