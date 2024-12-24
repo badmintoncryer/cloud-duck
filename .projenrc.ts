@@ -8,7 +8,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   jsiiVersion: '~5.6.0',
   name: 'cloud-duck',
   projenrcTs: true,
-  repositoryUrl: 'https://github.com/malaysia.cryer/cloud-duck.git',
+  repositoryUrl: 'https://github.com/badmintoncryer/cloud-duck.git',
   keywords: ['aws', 'cdk', 's3', 'duckdb', 'cognito'],
   gitignore: ['*.js', '*.d.ts', '!test/.*.snapshot/**/*', '.tmp', '!remix.config.js', '!postcss.config.js'],
   deps: ['deploy-time-build'],

@@ -3,7 +3,7 @@
   "description": "CDK construct for creating an analysis environment using DuckDB for S3 data",
   "repository": {
     "type": "git",
-    "url": "https://github.com/malaysia.cryer/cloud-duck.git"
+    "url": "https://github.com/badmintoncryer/cloud-duck.git"
   },
   "scripts": {
     "build": "npx projen build",
