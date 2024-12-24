@@ -1,6 +1,10 @@
 {
   "dependencies": [
     {
+      "name": "@aws-amplify/auth",
+      "type": "build"
+    },
+    {
       "name": "@aws-cdk/integ-runner",
       "version": "2.160.0-alpha.0",
       "type": "build"
@@ -11,12 +15,27 @@
       "type": "build"
     },
     {
+      "name": "@aws-sdk/client-cognito-identity",
+      "type": "build"
+    },
+    {
       "name": "@aws-sdk/client-s3",
       "type": "build"
     },
     {
-      "name": "@stylistic/eslint-plugin",
-      "version": "^2",
+      "name": "@aws-sdk/credential-provider-cognito-identity",
+      "type": "build"
+    },
+    {
+      "name": "@remix-run/dev",
+      "type": "build"
+    },
+    {
+      "name": "@remix-run/node",
+      "type": "build"
+    },
+    {
+      "name": "@types/aws-lambda",
       "type": "build"
     },
     {
@@ -28,13 +47,7 @@
       "type": "build"
     },
     {
-      "name": "@typescript-eslint/eslint-plugin",
-      "version": "^8",
-      "type": "build"
-    },
-    {
-      "name": "@typescript-eslint/parser",
-      "version": "^8",
+      "name": "aws-amplify",
       "type": "build"
     },
     {
@@ -48,19 +61,6 @@
     },
     {
       "name": "duckdb",
-      "type": "build"
-    },
-    {
-      "name": "eslint-import-resolver-typescript",
-      "type": "build"
-    },
-    {
-      "name": "eslint-plugin-import",
-      "type": "build"
-    },
-    {
-      "name": "eslint",
-      "version": "^9",
       "type": "build"
     },
     {
@@ -100,6 +100,18 @@
       "type": "build"
     },
     {
+      "name": "react",
+      "type": "build"
+    },
+    {
+      "name": "tailwind-merge",
+      "type": "build"
+    },
+    {
+      "name": "tailwindcss",
+      "type": "build"
+    },
+    {
       "name": "ts-jest",
       "type": "build"
     },
@@ -109,6 +121,14 @@
     },
     {
       "name": "typescript",
+      "type": "build"
+    },
+    {
+      "name": "vite",
+      "type": "build"
+    },
+    {
+      "name": "vite-tsconfig-paths",
       "type": "build"
     },
     {

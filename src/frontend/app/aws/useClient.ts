@@ -22,7 +22,6 @@ export const useClient = () => {
   const [s3Client, setS3Client] = useState<S3Client | null>(null);
 
   const authConfig = Amplify.getConfig().Auth?.Cognito;
-  console.log(JSON.stringify(authConfig, null, 2));
   const identityPoolId = authConfig?.identityPoolId ?? null;
   const userPoolId = authConfig?.userPoolId
     ? `cognito-idp.${region}.amazonaws.com/${authConfig.userPoolId}`
@@ -119,5 +118,5 @@ export const useClient = () => {
     );
   });
 
-  return { credentials, region };
+  return { credentials, region, s3Client };
 };

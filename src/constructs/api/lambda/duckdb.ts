@@ -112,7 +112,7 @@ exports.handler = async (event: APIGatewayProxyEvent) => {
         "Access-Control-Allow-Headers": "Content-Type",
       },
     };
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error executing SQL query or uploading DB file:", error);
     connection.close();
 

@@ -1,4 +1,5 @@
 import { awscdk } from 'projen';
+import { NodePackageManager } from 'projen/lib/javascript';
 const project = new awscdk.AwsCdkConstructLibrary({
   author: 'Kazuho CryerShinozuka',
   authorAddress: 'malaysia.cryer@gmail.com',
@@ -18,7 +19,32 @@ const project = new awscdk.AwsCdkConstructLibrary({
     'aws-lambda',
     'duckdb',
     '@aws-sdk/client-s3',
+    '@types/aws-lambda',
+    'react',
+    '@aws-sdk/client-cognito-identity',
+    '@aws-sdk/credential-provider-cognito-identity',
+    '@aws-amplify/auth',
+    'aws-amplify',
+    'tailwind-merge',
+    'tailwindcss',
+    '@remix-run/dev',
+    'vite',
+    'vite-tsconfig-paths',
+    '@remix-run/node',
   ],
+  excludeTypescript: ['src/frontend/**/*.ts'],
+  packageManager: NodePackageManager.PNPM,
+  tsconfig: {
+    exclude: ['src/frontend/**/*']
+  },
+  tsconfigDev: {
+    exclude: ['src/frontend/**/*']
+  },
+  eslint: false,
+  eslintOptions: {
+    dirs: ['src'],
+    ignorePatterns: ['*.js', '*.d.ts', 'node_modules/', '*.generated.ts', 'coverage', 'src/frontend/**/*.ts'],
+  },
   releaseToNpm: true,
   packageName: 'cloud-duck',
   publishToPypi: {
@@ -27,6 +53,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
   },
 });
 project.projectBuild.testTask.exec(
-  'yarn tsc -p tsconfig.dev.json && yarn integ-runner',
+  'pnpm tsc -p tsconfig.dev.json && pnpm integ-runner',
 );
 project.synth();

@@ -9,7 +9,7 @@ import { Cognito } from "./constructs/cognito";
 import { Api } from "./constructs/api";
 
 export interface CloudDuckProps {
-  targetBuckets: s3.Bucket[];
+  readonly targetBuckets: s3.Bucket[];
 }
 
 export class CloudDuck extends Construct {

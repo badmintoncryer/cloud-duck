@@ -1,6 +1,5 @@
 {
   "files": [
-    ".eslintrc.json",
     ".gitattributes",
     ".github/pull_request_template.md",
     ".github/workflows/build.yml",
@@ -9,6 +8,7 @@
     ".github/workflows/upgrade-main.yml",
     ".gitignore",
     ".mergify.yml",
+    ".npmrc",
     ".projen/deps.json",
     ".projen/files.json",
     ".projen/tasks.json",
