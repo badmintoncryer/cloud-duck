@@ -1,5 +1,5 @@
 import { Construct } from "constructs";
-import { CfnOutput, Lazy, RemovalPolicy, Stack } from "aws-cdk-lib";
+import { CfnOutput, Lazy, RemovalPolicy, Size, Stack } from "aws-cdk-lib";
 import * as cloudfront from "aws-cdk-lib/aws-cloudfront";
 import * as origins from "aws-cdk-lib/aws-cloudfront-origins";
 import * as s3 from "aws-cdk-lib/aws-s3";
@@ -8,10 +8,29 @@ import * as path from "node:path";
 import { Cognito } from "./constructs/cognito";
 import { Api } from "./constructs/api";
 
+/**
+ * Props for the CloudDuck construct
+ */
 export interface CloudDuckProps {
+  /**
+   * The S3 buckets which the cloud duck will analyze
+   *
+   * @default - All buckets in the account
+   */
   readonly targetBuckets: s3.Bucket[];
+  /**
+   * The amount of memory to allocate to the Lambda function
+   *
+   * @default - 1024 MiB
+   */
+  readonly memory: Size;
 }
 
+/**
+ * The CloudDuck construct
+ *
+ * This construct creates a serverless analysis environment using DuckDB for S3 data
+ */
 export class CloudDuck extends Construct {
   constructor(scope: Construct, id: string, props?: CloudDuckProps) {
     super(scope, id);
@@ -26,6 +45,7 @@ export class CloudDuck extends Construct {
     const api = new Api(this, "Api", {
       userPool: cognito.userPool,
       targetBuckets: props?.targetBuckets,
+      memory: props?.memory,
     });
 
     const hostingBucket = new s3.Bucket(this, "HostingBucket", {

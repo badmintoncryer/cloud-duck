@@ -1,20 +1,24 @@
 import * as duckdb from "duckdb";
 import * as fs from "node:fs";
-import {
-  S3Client,
-  GetObjectCommand,
-  PutObjectCommand,
-} from "@aws-sdk/client-s3";
+import * as path from "path";
+import { S3Client, GetObjectCommand, PutObjectCommand, ListObjectsV2Command, DeleteObjectCommand } from "@aws-sdk/client-s3";
 import { APIGatewayProxyEvent } from "aws-lambda";
 
-const getObjectFromS3 = async (
-  s3Client: S3Client,
-  bucket: string,
-  key: string
-): Promise<Buffer> => {
-  const s3Object = await s3Client.send(
-    new GetObjectCommand({ Bucket: bucket, Key: key })
-  );
+const syncS3WithLocal = async (s3Client: S3Client, bucket: string, prefix: string, localDir: string) => {
+  const s3Keys = await listObjectsFromS3(s3Client, bucket, prefix);
+  const localFiles = fs.readdirSync(localDir).map(file => `${prefix}/${file}`);
+
+  // S3 に存在するがローカルに存在しないファイルを特定
+  const filesToDelete = s3Keys.filter(key => !localFiles.includes(key));
+  // ローカルに存在しないファイルを S3 から削除
+  for (const key of filesToDelete) {
+    await s3Client.send(new DeleteObjectCommand({ Bucket: bucket, Key: key }));
+    console.log(`Deleted file from S3: ${key}`);
+  }
+};
+
+const getObjectFromS3 = async (s3Client: S3Client, bucket: string, key: string): Promise<Buffer> => {
+  const s3Object = await s3Client.send(new GetObjectCommand({ Bucket: bucket, Key: key }));
   const streamToBuffer = (stream: any) =>
     new Promise<Buffer>((resolve, reject) => {
       const chunks: any[] = [];
@@ -23,6 +27,42 @@ const getObjectFromS3 = async (
       stream.on("end", () => resolve(Buffer.concat(chunks)));
     });
   return streamToBuffer(s3Object.Body);
+};
+
+const listObjectsFromS3 = async (s3Client: S3Client, bucket: string, prefix: string): Promise<string[]> => {
+  const listObjectsCommand = new ListObjectsV2Command({ Bucket: bucket, Prefix: prefix });
+  const response = await s3Client.send(listObjectsCommand);
+  return response.Contents?.map(item => item.Key).filter((key): key is string => key !== undefined) ?? [];
+};
+
+const downloadFilesFromS3 = async (s3Client: S3Client, bucket: string, prefix: string, localDir: string) => {
+  const keys = await listObjectsFromS3(s3Client, bucket, prefix);
+  for (const key of keys) {
+    const filePath = path.join(localDir, key.replace(prefix, ""));
+    const fileContent = await getObjectFromS3(s3Client, bucket, key);
+    fs.writeFileSync(filePath, fileContent);
+    console.log(`Downloaded file from S3: ${filePath}`);
+  }
+};
+
+const uploadFilesToS3 = async (s3Client: S3Client, bucket: string, prefix: string, localDir: string) => {
+  const entries = fs.readdirSync(localDir);
+  for (const entry of entries) {
+    const entryPath = path.join(localDir, entry);
+    const stats = fs.statSync(entryPath);
+
+    if (stats.isFile() && fs.existsSync(entryPath)) {
+      const fileContent = fs.readFileSync(entryPath);
+      await s3Client.send(new PutObjectCommand({
+        Bucket: bucket,
+        Key: `${prefix}/${entry}`,
+        Body: fileContent,
+      }));
+      console.log(`Uploaded file to S3: ${entryPath}`);
+    } else {
+      console.log(`Skipping non-file entry: ${entryPath}`);
+    }
+  }
 };
 
 const s3Client = new S3Client({});
@@ -45,23 +85,20 @@ exports.handler = async (event: APIGatewayProxyEvent) => {
   }
 
   const userId = event.requestContext.authorizer?.claims.sub ?? "unknown";
-  const dbFilePath = `/tmp/${userId}.duckdb`;
-
-  // Check if the DB file exists in S3
-  try {
-    const bodyContents = await getObjectFromS3(
-      s3Client,
-      s3Bucket,
-      `${userId}.duckdb`
-    );
-    fs.writeFileSync(dbFilePath, bodyContents);
-    console.log(`Downloaded ${userId}.duckdb from S3`);
-  } catch (error) {
-    console.log(
-      `No existing DB file found in S3 for ${userId}, creating a new one`
-    );
+  const userDir = `/tmp/${userId}`;
+  if (!fs.existsSync(userDir)) {
+    fs.mkdirSync(userDir);
+    console.log(`Created directory for user: ${userDir}`);
   }
 
+  // Download all files from S3 to /tmp/${userId}
+  try {
+    await downloadFilesFromS3(s3Client, s3Bucket, userId, userDir);
+  } catch (error) {
+    console.log(`No existing files found in S3 for ${userId}, starting fresh`);
+  }
+
+  const dbFilePath = path.join(userDir, "db.duckdb");
   const db = new duckdb.Database(dbFilePath);
   const connection = db.connect();
   console.log("Connected to database");
@@ -89,51 +126,34 @@ exports.handler = async (event: APIGatewayProxyEvent) => {
       );
     `);
     const result = await query(sql);
-    connection.close();
-
-    // Upload the DB file back to S3
-    const dbFileContent = fs.readFileSync(dbFilePath);
-    await s3Client.send(
-      new PutObjectCommand({
-        Bucket: s3Bucket,
-        Key: `${userId}.duckdb`,
-        Body: dbFileContent,
-      })
-    );
-    console.log(`Uploaded ${userId}.duckdb to S3`);
-
     return {
       statusCode: 200,
       body: JSON.stringify(result, (_key, value) =>
-        typeof value === "bigint" ? value.toString() : value
+        typeof value === 'bigint' ? value.toString() : value
       ),
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "Content-Type",
       },
     };
-  } catch (error: any) {
+  } catch (error) {
     console.error("Error executing SQL query or uploading DB file:", error);
-    connection.close();
-
-    // Upload the DB file back to S3
-    const dbFileContent = fs.readFileSync(dbFilePath);
-    await s3Client.send(
-      new PutObjectCommand({
-        Bucket: s3Bucket,
-        Key: `${userId}.duckdb`,
-        Body: dbFileContent,
-      })
-    );
-    console.log(`Uploaded ${userId}.duckdb to S3`);
-
     return {
       statusCode: 500,
-      body: JSON.stringify({ message: error.message }),
+      body: JSON.stringify({ message: error }),
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "Content-Type",
       },
     };
+  } finally {
+    // connection close後に.walファイルが残ってたり削除されたりする。
+    // そのため、connection close後に/tmpとS3を同期する。
+    connection.close();
+    // Upload all files from /tmp to S3
+    await uploadFilesToS3(s3Client, s3Bucket, `${userId}`, userDir);
+    console.log(`Uploaded all files to S3 for ${userId}`);
+    // S3上の不要なファイルを削除
+    await syncS3WithLocal(s3Client, s3Bucket, `${userId}`, userDir);
   }
 };

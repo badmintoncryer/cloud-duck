@@ -4,6 +4,10 @@
 
 ### CloudDuck <a name="CloudDuck" id="cloud-duck.CloudDuck"></a>
 
+The CloudDuck construct.
+
+This construct creates a serverless analysis environment using DuckDB for S3 data
+
 #### Initializers <a name="Initializers" id="cloud-duck.CloudDuck.Initializer"></a>
 
 ```typescript
@@ -105,6 +109,8 @@ The tree node.
 
 ### CloudDuckProps <a name="CloudDuckProps" id="cloud-duck.CloudDuckProps"></a>
 
+Props for the CloudDuck construct.
+
 #### Initializer <a name="Initializer" id="cloud-duck.CloudDuckProps.Initializer"></a>
 
 ```typescript
@@ -117,7 +123,21 @@ const cloudDuckProps: CloudDuckProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#cloud-duck.CloudDuckProps.property.targetBuckets">targetBuckets</a></code> | <code>aws-cdk-lib.aws_s3.Bucket[]</code> | *No description.* |
+| <code><a href="#cloud-duck.CloudDuckProps.property.memory">memory</a></code> | <code>aws-cdk-lib.Size</code> | The amount of memory to allocate to the Lambda function. |
+| <code><a href="#cloud-duck.CloudDuckProps.property.targetBuckets">targetBuckets</a></code> | <code>aws-cdk-lib.aws_s3.Bucket[]</code> | The S3 buckets which the cloud duck will analyze. |
+
+---
+
+##### `memory`<sup>Required</sup> <a name="memory" id="cloud-duck.CloudDuckProps.property.memory"></a>
+
+```typescript
+public readonly memory: Size;
+```
+
+- *Type:* aws-cdk-lib.Size
+- *Default:* 1024 MiB
+
+The amount of memory to allocate to the Lambda function.
 
 ---
 
@@ -128,6 +148,9 @@ public readonly targetBuckets: Bucket[];
 ```
 
 - *Type:* aws-cdk-lib.aws_s3.Bucket[]
+- *Default:* All buckets in the account
+
+The S3 buckets which the cloud duck will analyze.
 
 ---
 

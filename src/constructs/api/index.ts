@@ -11,7 +11,7 @@ import { Duration } from "aws-cdk-lib";
 
 export interface ApiProps {
   readonly userPool: cognito.IUserPool;
-  readonly memorySize?: Size;
+  readonly memory?: Size;
   readonly targetBuckets?: s3.IBucket[];
 }
 
@@ -73,7 +73,7 @@ export class Api extends Construct {
       entry: path.join(__dirname, "./lambda/duckdb.ts"),
       runtime: lambda.Runtime.NODEJS_20_X,
       timeout: Duration.minutes(5),
-      memorySize: props.memorySize?.toMebibytes() ?? 1024,
+      memorySize: props.memory?.toMebibytes() ?? 1024,
       bundling: {
         externalModules: ['nock', 'mock-aws-s3', 'duckdb'],
       },
