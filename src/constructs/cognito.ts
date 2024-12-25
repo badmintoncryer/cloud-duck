@@ -1,6 +1,6 @@
 import { Construct } from "constructs";
 import * as cognito from "aws-cdk-lib/aws-cognito";
-import { RemovalPolicy } from "aws-cdk-lib";
+import { CfnOutput, RemovalPolicy } from "aws-cdk-lib";
 
 export interface CognitoProps {
   userpool?: cognito.IUserPool;
@@ -48,6 +48,10 @@ export class Cognito extends Construct {
         scopes: [cognito.OAuthScope.EMAIL, cognito.OAuthScope.OPENID, cognito.OAuthScope.PROFILE],
       },
       preventUserExistenceErrors: true,
+    });
+
+    new CfnOutput(this, "UserPoolId", {
+      value: this.userPool.userPoolId,
     });
   }
 }

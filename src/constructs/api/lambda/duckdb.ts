@@ -140,7 +140,9 @@ exports.handler = async (event: APIGatewayProxyEvent) => {
     console.error("Error executing SQL query or uploading DB file:", error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ message: error }),
+      body: JSON.stringify({
+        message: error instanceof Error ? error.message : String(error),
+      }),
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "Content-Type",
