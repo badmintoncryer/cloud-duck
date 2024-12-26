@@ -70,7 +70,7 @@ export class Api extends Construct {
       autoDeleteObjects: true,
     });
     const duckdbHandler = new nodejs.NodejsFunction(this, "DuckDb", {
-      entry: path.join(__dirname, "./lambda/duckdb.ts"),
+      entry: path.join(__dirname, "./lambda/duckdb.js"),
       runtime: lambda.Runtime.NODEJS_20_X,
       timeout: Duration.minutes(5),
       memorySize: props.memory?.toMebibytes() ?? 1024,
