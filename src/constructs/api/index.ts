@@ -75,7 +75,7 @@ export class Api extends Construct {
       timeout: Duration.minutes(5),
       memorySize: props.memory?.toMebibytes() ?? 1024,
       bundling: {
-        externalModules: ['nock', 'mock-aws-s3', 'duckdb'],
+        externalModules: ['nock', 'mock-aws-s3', 'duckdb', '@smithy/core', '@aws-sdk/core'],
       },
       environment: {
         S3_BUCKET: duckdbBucket.bucketName,
