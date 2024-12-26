@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "esbuild index.ts --bundle --outdir=./dist --platform=node --external:@aws-sdk/* --loader:.html=text"
+    "build": "esbuild index.ts --bundle --outdir=./build --platform=node --external:@aws-sdk/* --loader:.html=text"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.717.0",
@@ -13,8 +13,12 @@
   "devDependencies": {
     "@types/aws-lambda": "^8.10.146",
     "@types/node": "^22.10.2",
+    "aws-sdk": "^2.1692.0",
     "esbuild": "^0.24.2",
     "mock-aws-s3": "^4.0.2",
     "nock": "^13.5.6"
-  }
+  },
+  "files": [
+    "build/index.js"
+  ]
 }

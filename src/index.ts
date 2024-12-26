@@ -87,7 +87,7 @@ export class CloudDuck extends Construct {
     new NodejsBuild(this, "Build", {
       assets: [
         {
-          path: path.join(__dirname, "./frontend"),
+          path: path.join(__dirname, "../frontend"),
           exclude: ["node_modules", "build"],
         }
       ],
