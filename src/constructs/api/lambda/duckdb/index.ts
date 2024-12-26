@@ -1,6 +1,6 @@
 import * as duckdb from "duckdb";
 import * as fs from "node:fs";
-import * as path from "path";
+import * as path from "node:path";
 import { S3Client, GetObjectCommand, PutObjectCommand, ListObjectsV2Command, DeleteObjectCommand } from "@aws-sdk/client-s3";
 import { APIGatewayProxyEvent } from "aws-lambda";
 

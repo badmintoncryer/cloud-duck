@@ -53,6 +53,9 @@ const project = new awscdk.AwsCdkConstructLibrary({
     module: 'cloud-duck',
   },
 });
+project.projectBuild.compileTask.prependExec('npm ci && npm run build', {
+  cwd: 'src/constructs/api/lambda/duckdb',
+});
 // project.projectBuild.testTask.exec(
 //   'pnpm tsc -p tsconfig.dev.json && pnpm integ-runner',
 // );

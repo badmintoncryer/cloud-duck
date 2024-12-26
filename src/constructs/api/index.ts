@@ -1,7 +1,6 @@
 import { Construct } from "constructs";
 import { RemovalPolicy, Size } from "aws-cdk-lib";
 import * as apigateway from "aws-cdk-lib/aws-apigateway";
-import * as nodejs from "aws-cdk-lib/aws-lambda-nodejs";
 import * as cognito from "aws-cdk-lib/aws-cognito";
 import * as lambda from "aws-cdk-lib/aws-lambda";
 import * as iam from "aws-cdk-lib/aws-iam";
@@ -69,14 +68,13 @@ export class Api extends Construct {
       removalPolicy: RemovalPolicy.DESTROY,
       autoDeleteObjects: true,
     });
-    const duckdbHandler = new nodejs.NodejsFunction(this, "DuckDb", {
-      entry: path.join(__dirname, "./lambda/duckdb.js"),
+
+    const duckdbHandler = new lambda.Function(this, "DuckDbHandler", {
       runtime: lambda.Runtime.NODEJS_20_X,
-      timeout: Duration.minutes(5),
+      code: lambda.Code.fromAsset(path.join(__dirname, "./lambda/duckdb/dist")),
+      handler: "index.handler",
+      timeout: Duration.minutes(15),
       memorySize: props.memory?.toMebibytes() ?? 1024,
-      bundling: {
-        externalModules: ['nock', 'mock-aws-s3', 'duckdb', '@smithy/core', '@aws-sdk/core'],
-      },
       environment: {
         S3_BUCKET: duckdbBucket.bucketName,
       },
