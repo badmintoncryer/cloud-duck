@@ -23,6 +23,7 @@ npm i cloud-duck
 ### Deploy
 
 ```typescript
+import { Size } from 'aws-cdk-lib';
 import { CloudDuck } from 'cloud-duck';
 
 declare const logBucket: s3.IBucket;
@@ -32,6 +33,9 @@ new CloudDuck(this, 'CloudDuck', {
   // CloudDuck can access to all of the buckets in the account by default.
   // If you want to restrict the access, you can use the targetBuckets property.
   targetBuckets: [logBucket],
+  // The memory size of the Lambda function
+  // Default: 1024 MB
+  memory: Size.mebibytes(1024),
 });
 ```
 

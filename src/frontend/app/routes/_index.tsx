@@ -63,8 +63,9 @@ export default function Index() {
             <button
               onClick={handleSubmitQuery}
               disabled={isLoading}
-              className={`px-6 py-3 ${isLoading ? 'bg-gray-500' : 'bg-green-500'} text-white rounded-lg ${isLoading ? '' : 'hover:bg-green-600'} transition duration-300`}
+              className={`px-6 py-3 ${isLoading ? 'bg-gray-500' : 'bg-green-500'} text-white rounded-lg ${isLoading ? '' : 'hover:bg-green-600'} transition duration-300 flex items-center justify-center`}
             >
+              {isLoading && <div className="animate-spin h-5 w-5 border-4 border-blue-500 rounded-full border-t-transparent mr-2" />}
               Submit Query
             </button>
             <pre className="w-full h-64 p-4 border border-gray-600 bg-gray-700 text-gray-100 rounded-lg overflow-auto">
