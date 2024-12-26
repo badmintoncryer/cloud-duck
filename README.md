@@ -79,11 +79,11 @@ arn:aws:cloudformation:us-east-1:123456789012:stack/AwsStack/dd0960c0-b3d5-11ef-
 
 Enter the username and password.
 
-![Login](images/login.png){: style="max-width: 200px; max-height: 200px;"}
+![Login](images/login.png)
 
 When you log in at the first time, you need to change the password.
 
-![Change Password](images/change-password.png){: style="max-width: 200px; max-height: 200px;"}
+![Change Password](images/change-password.png)
 
 Play with the CloudDuck!
 
