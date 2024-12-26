@@ -1,12 +1,21 @@
 <p align="center">
-  <img src="src/frontend/public/icon.png" alt="CloudDuck Icon" style="max-width: 400px; max-height: 400px;" />
+  <img src="src/frontend/public/icon.png" alt="CloudDuck Icon" style="max-width: 300px; max-height: 300px;" />
 </p>
 
-CloudDuck is a simple and easy-to-use analysis environment for S3 data, featuring DuckDB with built-in authentication.
+CloudDuck is a CDK construct for simple and easy-to-use analysis environment for S3 data, featuring DuckDB with built-in authentication.
 
 <p align="center">
   <img src="images/cloudduck.gif" alt="CloudDuck Display Image" />
 </p>
+
+[![View on Construct Hub](https://constructs.dev/badge?package=cloud-duck)](https://constructs.dev/packages/cloud-duck)
+[![Open in Visual Studio Code](https://img.shields.io/static/v1?logo=visualstudiocode&label=&message=Open%20in%20Visual%20Studio%20Code&labelColor=2c2c32&color=007acc&logoColor=007acc)](https://open.vscode.dev/badmintoncryer/cloud-duck)
+[![npm version](https://badge.fury.io/js/cloud-duck.svg)](https://badge.fury.io/js/cloud-duck)
+[![Build Status](https://github.com/badmintoncryer/cloud-duck/actions/workflows/build.yml/badge.svg)](https://github.com/badmintoncryer/cloud-duck/actions/workflows/build.yml)
+[![Release Status](https://github.com/badmintoncryer/cloud-duck/actions/workflows/release.yml/badge.svg)](https://github.com/badmintoncryer/cloud-duck/actions/workflows/release.yml)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+![Downloads](https://img.shields.io/badge/-DOWNLOADS:-brightgreen?color=gray)
+![npm downloads](https://img.shields.io/npm/dt/cloud-duck?label=npm&color=blueviolet)
 
 ## Architecture
 
@@ -41,7 +50,7 @@ new CloudDuck(this, 'CloudDuck', {
 
 ### Add user to the Cognito User Pool
 
-Add user to the Cognito User Pool to access the CloudDuck.
+You can add a user to the Cognito User Pool with the following command.
 
 ```sh
 aws cognito-idp admin-create-user \
@@ -51,6 +60,8 @@ aws cognito-idp admin-create-user \
 --message-action SUPPRESS \
 --temporary-password Password1!
 ```
+
+You can also add a user via the AWS Management Console.
 
 ### Access
 
@@ -68,11 +79,11 @@ arn:aws:cloudformation:us-east-1:123456789012:stack/AwsStack/dd0960c0-b3d5-11ef-
 
 Enter the username and password.
 
-![Login](images/login.png)
+![Login](images/login.png){: style="max-width: 200px; max-height: 200px;"}
 
 When you log in at the first time, you need to change the password.
 
-![Change Password](images/change-password.png)
+![Change Password](images/change-password.png){: style="max-width: 200px; max-height: 200px;"}
 
 Play with the CloudDuck!
 

@@ -128,7 +128,7 @@ const cloudDuckProps: CloudDuckProps = { ... }
 
 ---
 
-##### `memory`<sup>Required</sup> <a name="memory" id="cloud-duck.CloudDuckProps.property.memory"></a>
+##### `memory`<sup>Optional</sup> <a name="memory" id="cloud-duck.CloudDuckProps.property.memory"></a>
 
 ```typescript
 public readonly memory: Size;
@@ -141,7 +141,7 @@ The amount of memory to allocate to the Lambda function.
 
 ---
 
-##### `targetBuckets`<sup>Required</sup> <a name="targetBuckets" id="cloud-duck.CloudDuckProps.property.targetBuckets"></a>
+##### `targetBuckets`<sup>Optional</sup> <a name="targetBuckets" id="cloud-duck.CloudDuckProps.property.targetBuckets"></a>
 
 ```typescript
 public readonly targetBuckets: Bucket[];

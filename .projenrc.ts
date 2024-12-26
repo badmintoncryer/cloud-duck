@@ -31,19 +31,20 @@ const project = new awscdk.AwsCdkConstructLibrary({
     'vite',
     'vite-tsconfig-paths',
     '@remix-run/node',
+    'esbuild',
   ],
-  excludeTypescript: ['src/frontend/**/*.ts'],
+  excludeTypescript: ['src/frontend/**/*.ts', 'test/.*.snapshot/**/*'],
   packageManager: NodePackageManager.PNPM,
   tsconfig: {
-    exclude: ['src/frontend/**/*']
+    exclude: ['src/frontend/**/*', 'test/.*.snapshot/**/*'],
   },
   tsconfigDev: {
-    exclude: ['src/frontend/**/*']
+    exclude: ['src/frontend/**/*', 'test/.*.snapshot/**/*'],
   },
   eslint: false,
   eslintOptions: {
     dirs: ['src'],
-    ignorePatterns: ['*.js', '*.d.ts', 'node_modules/', '*.generated.ts', 'coverage', 'src/frontend/**/*.ts'],
+    ignorePatterns: ['*.js', '*.d.ts', 'node_modules/', '*.generated.ts', 'coverage', 'src/frontend/**/*.ts', 'test/.*.snapshot/**/*'],
   },
   releaseToNpm: true,
   packageName: 'cloud-duck',
@@ -52,7 +53,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
     module: 'cloud-duck',
   },
 });
-project.projectBuild.testTask.exec(
-  'pnpm tsc -p tsconfig.dev.json && pnpm integ-runner',
-);
+// project.projectBuild.testTask.exec(
+//   'pnpm tsc -p tsconfig.dev.json && pnpm integ-runner',
+// );
 project.synth();

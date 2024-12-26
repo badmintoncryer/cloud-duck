@@ -10,7 +10,6 @@ export interface CognitoProps {
 
 export class Cognito extends Construct {
   public readonly userPool: cognito.IUserPool;
-  public readonly userPoolDomain: cognito.UserPoolDomain;
   public readonly appClient: cognito.UserPoolClient;
 
   constructor(scope: Construct, id: string, props?: CognitoProps) {
@@ -25,11 +24,6 @@ export class Cognito extends Construct {
         email: true,
       },
       removalPolicy: RemovalPolicy.DESTROY,
-    });
-    this.userPoolDomain = this.userPool.addDomain("Domain", {
-      cognitoDomain: {
-        domainPrefix: "cloudduck",
-      },
     });
 
     this.appClient = this.userPool.addClient("Client", {

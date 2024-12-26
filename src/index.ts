@@ -17,13 +17,13 @@ export interface CloudDuckProps {
    *
    * @default - All buckets in the account
    */
-  readonly targetBuckets: s3.Bucket[];
+  readonly targetBuckets?: s3.Bucket[];
   /**
    * The amount of memory to allocate to the Lambda function
    *
    * @default - 1024 MiB
    */
-  readonly memory: Size;
+  readonly memory?: Size;
 }
 
 /**
@@ -87,7 +87,7 @@ export class CloudDuck extends Construct {
     new NodejsBuild(this, "Build", {
       assets: [
         {
-          path: path.join(__dirname, "../../frontend"),
+          path: path.join(__dirname, "./frontend"),
           exclude: ["node_modules", "build"],
         }
       ],
@@ -99,7 +99,6 @@ export class CloudDuck extends Construct {
         VITE_COGNITO_USER_POOL_ID: cognito.userPool.userPoolId,
         VITE_COGNITO_USER_POOL_CLIENT_ID: cognito.appClient.userPoolClientId,
         VITE_COGNITO_REGION: cognito.userPool.stack.region,
-        VITE_COGNITO_DOMAIN: cognito.userPoolDomain.domainName,
         VITE_API_ROOT: `${api.api.url}v1`,
         VITE_AWS_ACCOUNT_ID: Stack.of(this).account,
         // VITE_API_ROOT: `https://${distributionDomainName}/api/v1`,

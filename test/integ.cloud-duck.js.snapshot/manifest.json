@@ -1,0 +1,407 @@
+{
+  "version": "38.0.1",
+  "artifacts": {
+    "TestStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "TestStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "TestStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "TestStack.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "notificationArns": [],
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/987ff82c54c10944c0309df80d397183a427a9778888db49c6013f4e4ebd3998.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "TestStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "TestStack.assets"
+      ],
+      "metadata": {
+        "/TestStack/TargetBucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TargetBucket6BBF3429"
+          }
+        ],
+        "/TestStack/TargetBucket/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TargetBucketPolicyDDA8DC0A"
+          }
+        ],
+        "/TestStack/TargetBucket/AutoDeleteObjectsCustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TargetBucketAutoDeleteObjectsCustomResourceB87F72D2"
+          }
+        ],
+        "/TestStack/LatestNodeRuntimeMap": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LatestNodeRuntimeMap"
+          }
+        ],
+        "/TestStack/Custom::S3AutoDeleteObjectsCustomResourceProvider": [
+          {
+            "type": "aws:cdk:is-custom-resource-handler-customResourceProvider",
+            "data": true
+          }
+        ],
+        "/TestStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092"
+          }
+        ],
+        "/TestStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F"
+          }
+        ],
+        "/TestStack/CloudDuck/Cognito/UserPool/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CloudDuckCognitoUserPool3448B54F"
+          }
+        ],
+        "/TestStack/CloudDuck/Cognito/UserPool/Client/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CloudDuckCognitoUserPoolClient3131988C"
+          }
+        ],
+        "/TestStack/CloudDuck/Cognito/UserPoolId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CloudDuckCognitoUserPoolId2D258434"
+          }
+        ],
+        "/TestStack/CloudDuck/Api/Api/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CloudDuckApi7E40F488"
+          }
+        ],
+        "/TestStack/CloudDuck/Api/Api/Deployment/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CloudDuckApiDeployment843CB85A6bfee5a23525edbd4194df89bbee99a9"
+          }
+        ],
+        "/TestStack/CloudDuck/Api/Api/DeploymentStage.api/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CloudDuckApiDeploymentStageapi1603A766"
+          }
+        ],
+        "/TestStack/CloudDuck/Api/Api/Endpoint": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CloudDuckApiEndpoint38BFF0BB"
+          }
+        ],
+        "/TestStack/CloudDuck/Api/Api/Default/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CloudDuckApiOPTIONS4A5AB874"
+          }
+        ],
+        "/TestStack/CloudDuck/Api/Api/Default/v1/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CloudDuckApiv1A843A6D9"
+          }
+        ],
+        "/TestStack/CloudDuck/Api/Api/Default/v1/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CloudDuckApiv1OPTIONS355D8B3F"
+          }
+        ],
+        "/TestStack/CloudDuck/Api/Api/Default/v1/GET/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CloudDuckApiv1GET26F5E3B8"
+          }
+        ],
+        "/TestStack/CloudDuck/Api/Api/Default/v1/duckdb/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CloudDuckApiv1duckdb2BC0DF07"
+          }
+        ],
+        "/TestStack/CloudDuck/Api/Api/Default/v1/duckdb/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CloudDuckApiv1duckdbOPTIONS9D78131C"
+          }
+        ],
+        "/TestStack/CloudDuck/Api/Api/Default/v1/duckdb/POST/ApiPermission.TestStackCloudDuckApi0E586E39.POST..v1.duckdb": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CloudDuckApiv1duckdbPOSTApiPermissionTestStackCloudDuckApi0E586E39POSTv1duckdbB490F2BE"
+          }
+        ],
+        "/TestStack/CloudDuck/Api/Api/Default/v1/duckdb/POST/ApiPermission.Test.TestStackCloudDuckApi0E586E39.POST..v1.duckdb": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CloudDuckApiv1duckdbPOSTApiPermissionTestTestStackCloudDuckApi0E586E39POSTv1duckdb35E1BB5D"
+          }
+        ],
+        "/TestStack/CloudDuck/Api/Api/Default/v1/duckdb/POST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CloudDuckApiv1duckdbPOSTCB9A4C1D"
+          }
+        ],
+        "/TestStack/CloudDuck/Api/Authorizer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CloudDuckApiAuthorizer2774E5FF"
+          }
+        ],
+        "/TestStack/CloudDuck/Api/DuckDbBucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CloudDuckApiDuckDbBucket64E19DBF"
+          }
+        ],
+        "/TestStack/CloudDuck/Api/DuckDbBucket/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CloudDuckApiDuckDbBucketPolicy8918E78F"
+          }
+        ],
+        "/TestStack/CloudDuck/Api/DuckDbBucket/AutoDeleteObjectsCustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CloudDuckApiDuckDbBucketAutoDeleteObjectsCustomResourceE3471089"
+          }
+        ],
+        "/TestStack/CloudDuck/Api/DuckDb/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CloudDuckApiDuckDbServiceRoleF07CAB71"
+          }
+        ],
+        "/TestStack/CloudDuck/Api/DuckDb/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CloudDuckApiDuckDbServiceRoleDefaultPolicyAA548BF6"
+          }
+        ],
+        "/TestStack/CloudDuck/Api/DuckDb/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CloudDuckApiDuckDb452CF02A"
+          }
+        ],
+        "/TestStack/CloudDuck/HostingBucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CloudDuckHostingBucket07B2A949"
+          }
+        ],
+        "/TestStack/CloudDuck/HostingBucket/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CloudDuckHostingBucketPolicyEBCDF000"
+          }
+        ],
+        "/TestStack/CloudDuck/HostingBucket/AutoDeleteObjectsCustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CloudDuckHostingBucketAutoDeleteObjectsCustomResourceF564F3AC"
+          }
+        ],
+        "/TestStack/CloudDuck/CloudFront/Origin1/S3OriginAccessControl/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CloudDuckCloudFrontOrigin1S3OriginAccessControl5A4958C3"
+          }
+        ],
+        "/TestStack/CloudDuck/CloudFront/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CloudDuckCloudFront12AF4623"
+          }
+        ],
+        "/TestStack/CloudDuck/Build/Project/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CloudDuckBuildProjectRoleC5830BAC"
+          }
+        ],
+        "/TestStack/CloudDuck/Build/Project/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CloudDuckBuildProjectRoleDefaultPolicy726149AF"
+          }
+        ],
+        "/TestStack/CloudDuck/Build/Project/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CloudDuckBuildProject21141513"
+          }
+        ],
+        "/TestStack/CloudDuck/Build/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CloudDuckBuildDE893DB8"
+          }
+        ],
+        "/TestStack/CloudDuck/Build/Deploy/AwsCliLayer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CloudDuckBuildDeployAwsCliLayerDCBC30A4"
+          }
+        ],
+        "/TestStack/CloudDuck/Build/Deploy/CustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CloudDuckBuildDeployCustomResourceB782F9CA"
+          }
+        ],
+        "/TestStack/CloudDuck/DistributionUrl": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CloudDuckDistributionUrl84FC8296"
+          }
+        ],
+        "/TestStack/NodejsBuildCustomResourceHandler25648b212c404f09aa65b6bbb0c44659/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NodejsBuildCustomResourceHandler25648b212c404f09aa65b6bbb0c44659ServiceRoleCB01FBE6"
+          }
+        ],
+        "/TestStack/NodejsBuildCustomResourceHandler25648b212c404f09aa65b6bbb0c44659/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NodejsBuildCustomResourceHandler25648b212c404f09aa65b6bbb0c44659ServiceRoleDefaultPolicyCF8879D3"
+          }
+        ],
+        "/TestStack/NodejsBuildCustomResourceHandler25648b212c404f09aa65b6bbb0c44659/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NodejsBuildCustomResourceHandler25648b212c404f09aa65b6bbb0c446591C4101F8"
+          }
+        ],
+        "/TestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C": [
+          {
+            "type": "aws:cdk:is-custom-resource-handler-singleton",
+            "data": true
+          },
+          {
+            "type": "aws:cdk:is-custom-resource-handler-runtime-family",
+            "data": 2
+          }
+        ],
+        "/TestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265"
+          }
+        ],
+        "/TestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF"
+          }
+        ],
+        "/TestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536"
+          }
+        ],
+        "/TestStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/TestStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "TestStack"
+    },
+    "TestDefaultTestDeployAssert12909640.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "TestDefaultTestDeployAssert12909640.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "TestDefaultTestDeployAssert12909640": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "TestDefaultTestDeployAssert12909640.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "notificationArns": [],
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/21fbb51d7b23f6a6c262b46a9caee79d744a3ac019fd45422d988b96d44b2a22.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "TestDefaultTestDeployAssert12909640.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "TestDefaultTestDeployAssert12909640.assets"
+      ],
+      "metadata": {
+        "/Test/DefaultTest/DeployAssert/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/Test/DefaultTest/DeployAssert/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "Test/DefaultTest/DeployAssert"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}

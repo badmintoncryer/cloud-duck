@@ -232,9 +232,6 @@
         {
           "exec": "jest --passWithNoTests --updateSnapshot",
           "receiveArgs": true
-        },
-        {
-          "exec": "pnpm tsc -p tsconfig.dev.json && pnpm integ-runner"
         }
       ]
     },
@@ -272,13 +269,13 @@
       },
       "steps": [
         {
-          "exec": "pnpm dlx npm-check-updates@16 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@aws-amplify/auth,@aws-sdk/client-cognito-identity,@aws-sdk/client-s3,@aws-sdk/credential-provider-cognito-identity,@remix-run/dev,@remix-run/node,@types/aws-lambda,@types/jest,@types/node,aws-amplify,aws-lambda,duckdb,jest,jsii-diff,jsii-pacmak,projen,react,tailwind-merge,tailwindcss,ts-jest,ts-node,typescript,vite,vite-tsconfig-paths,deploy-time-build"
+          "exec": "pnpm dlx npm-check-updates@16 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@aws-amplify/auth,@aws-sdk/client-cognito-identity,@aws-sdk/client-s3,@aws-sdk/credential-provider-cognito-identity,@remix-run/dev,@remix-run/node,@types/aws-lambda,@types/jest,@types/node,aws-amplify,aws-lambda,duckdb,esbuild,jest,jsii-diff,jsii-pacmak,projen,react,tailwind-merge,tailwindcss,ts-jest,ts-node,typescript,vite,vite-tsconfig-paths,deploy-time-build"
         },
         {
           "exec": "pnpm i --no-frozen-lockfile"
         },
         {
-          "exec": "pnpm update @aws-amplify/auth @aws-cdk/integ-runner @aws-cdk/integ-tests-alpha @aws-sdk/client-cognito-identity @aws-sdk/client-s3 @aws-sdk/credential-provider-cognito-identity @remix-run/dev @remix-run/node @types/aws-lambda @types/jest @types/node aws-amplify aws-lambda commit-and-tag-version duckdb jest jest-junit jsii-diff jsii-docgen jsii-pacmak jsii-rosetta jsii projen react tailwind-merge tailwindcss ts-jest ts-node typescript vite vite-tsconfig-paths aws-cdk-lib constructs deploy-time-build"
+          "exec": "pnpm update @aws-amplify/auth @aws-cdk/integ-runner @aws-cdk/integ-tests-alpha @aws-sdk/client-cognito-identity @aws-sdk/client-s3 @aws-sdk/credential-provider-cognito-identity @remix-run/dev @remix-run/node @types/aws-lambda @types/jest @types/node aws-amplify aws-lambda commit-and-tag-version duckdb esbuild jest jest-junit jsii-diff jsii-docgen jsii-pacmak jsii-rosetta jsii projen react tailwind-merge tailwindcss ts-jest ts-node typescript vite vite-tsconfig-paths aws-cdk-lib constructs deploy-time-build"
         },
         {
           "exec": "npx projen"

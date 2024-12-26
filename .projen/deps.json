@@ -64,6 +64,10 @@
       "type": "build"
     },
     {
+      "name": "esbuild",
+      "type": "build"
+    },
+    {
       "name": "jest",
       "type": "build"
     },
