@@ -4,6 +4,9 @@
 
 CloudDuck is a CDK construct for simple and easy-to-use analysis environment for S3 data, featuring DuckDB with built-in authentication.
 
+By simply deploying the Construct, you can launch a SaaS that provides an analytics dashboard like the one shown below.
+User authentication for access is implemented using Cognito, ensuring that only authorized users can log in.
+
 <p align="center">
   <img src="images/cloudduck.gif" alt="CloudDuck Display Image" />
 </p>
@@ -16,6 +19,11 @@ CloudDuck is a CDK construct for simple and easy-to-use analysis environment for
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 ![Downloads](https://img.shields.io/badge/-DOWNLOADS:-brightgreen?color=gray)
 ![npm downloads](https://img.shields.io/npm/dt/cloud-duck?label=npm&color=blueviolet)
+
+## Use Cases
+
+- When you want to request data analysis on S3 using DuckDB but prefer not to issue S3 access credentials to the analysts.
+- When you want to minimize the costs incurred from downloading large amounts of S3 data to local storage.
 
 ## Architecture
 
@@ -30,6 +38,8 @@ npm i cloud-duck
 ## Setup
 
 ### Deploy
+
+You can deploy the CloudDuck with the following code in the CDK stack.
 
 ```typescript
 import { Size } from 'aws-cdk-lib';
@@ -50,7 +60,7 @@ new CloudDuck(this, 'CloudDuck', {
 
 ### Add user to the Cognito User Pool
 
-You can add a user to the Cognito User Pool with the following command.
+Add a user to the Cognito User Pool with the following command.
 
 ```sh
 aws cognito-idp admin-create-user \
@@ -105,6 +115,8 @@ Ofcourse, you can store the result as a new table.
 ```sql
 CREATE TABLE new_table AS SELECT * FROM read_csv_auto('s3://your-bucket-name/your-file.csv');
 ```
+
+Detail usage of DuckDB is available at [DuckDB Documentation](https://duckdb.org/docs/sql/introduction.html).
 
 ### Persistence
 
