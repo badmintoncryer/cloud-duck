@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="src/frontend/public/icon.png" alt="CloudDuck Icon" style="max-width: 300px; max-height: 300px;" />
+  <img src="frontend/public/icon.png" alt="CloudDuck Icon" style="max-width: 300px; max-height: 300px;" />
 </p>
 
 CloudDuck is a CDK construct for simple and easy-to-use analysis environment for S3 data, featuring DuckDB with built-in authentication.
