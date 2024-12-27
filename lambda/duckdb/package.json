@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "esbuild index.ts --bundle --outdir=./build --platform=node --external:@aws-sdk/* --loader:.html=text"
+    "build": "esbuild index.ts --bundle --outdir=./build --platform=node --external:@aws-sdk/* --external:duckdb --loader:.html=text"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.717.0",
