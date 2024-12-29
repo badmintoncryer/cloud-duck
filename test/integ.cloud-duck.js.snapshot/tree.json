@@ -381,7 +381,7 @@
                               "aws:cdk:cloudformation:type": "AWS::ApiGateway::Stage",
                               "aws:cdk:cloudformation:props": {
                                 "deploymentId": {
-                                  "Ref": "CloudDuckApiDeployment843CB85A6bfee5a23525edbd4194df89bbee99a9"
+                                  "Ref": "CloudDuckApiDeployment843CB85A3b0ba1b48ed2c50ecd4ecaf8301edc74"
                                 },
                                 "restApiId": {
                                   "Ref": "CloudDuckApi7E40F488"
@@ -702,7 +702,7 @@
                                             "action": "lambda:InvokeFunction",
                                             "functionName": {
                                               "Fn::GetAtt": [
-                                                "CloudDuckApiDuckDb452CF02A",
+                                                "CloudDuckApiDuckDbHandler72CC6FC1",
                                                 "Arn"
                                               ]
                                             },
@@ -751,7 +751,7 @@
                                             "action": "lambda:InvokeFunction",
                                             "functionName": {
                                               "Fn::GetAtt": [
-                                                "CloudDuckApiDuckDb452CF02A",
+                                                "CloudDuckApiDuckDbHandler72CC6FC1",
                                                 "Arn"
                                               ]
                                             },
@@ -815,7 +815,7 @@
                                                     ":lambda:path/2015-03-31/functions/",
                                                     {
                                                       "Fn::GetAtt": [
-                                                        "CloudDuckApiDuckDb452CF02A",
+                                                        "CloudDuckApiDuckDbHandler72CC6FC1",
                                                         "Arn"
                                                       ]
                                                     },
@@ -1022,17 +1022,17 @@
                       "version": "2.160.0"
                     }
                   },
-                  "DuckDb": {
-                    "id": "DuckDb",
-                    "path": "TestStack/CloudDuck/Api/DuckDb",
+                  "DuckDbHandler": {
+                    "id": "DuckDbHandler",
+                    "path": "TestStack/CloudDuck/Api/DuckDbHandler",
                     "children": {
                       "ServiceRole": {
                         "id": "ServiceRole",
-                        "path": "TestStack/CloudDuck/Api/DuckDb/ServiceRole",
+                        "path": "TestStack/CloudDuck/Api/DuckDbHandler/ServiceRole",
                         "children": {
                           "ImportServiceRole": {
                             "id": "ImportServiceRole",
-                            "path": "TestStack/CloudDuck/Api/DuckDb/ServiceRole/ImportServiceRole",
+                            "path": "TestStack/CloudDuck/Api/DuckDbHandler/ServiceRole/ImportServiceRole",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.Resource",
                               "version": "2.160.0"
@@ -1040,7 +1040,7 @@
                           },
                           "Resource": {
                             "id": "Resource",
-                            "path": "TestStack/CloudDuck/Api/DuckDb/ServiceRole/Resource",
+                            "path": "TestStack/CloudDuck/Api/DuckDbHandler/ServiceRole/Resource",
                             "attributes": {
                               "aws:cdk:cloudformation:type": "AWS::IAM::Role",
                               "aws:cdk:cloudformation:props": {
@@ -1079,11 +1079,11 @@
                           },
                           "DefaultPolicy": {
                             "id": "DefaultPolicy",
-                            "path": "TestStack/CloudDuck/Api/DuckDb/ServiceRole/DefaultPolicy",
+                            "path": "TestStack/CloudDuck/Api/DuckDbHandler/ServiceRole/DefaultPolicy",
                             "children": {
                               "Resource": {
                                 "id": "Resource",
-                                "path": "TestStack/CloudDuck/Api/DuckDb/ServiceRole/DefaultPolicy/Resource",
+                                "path": "TestStack/CloudDuck/Api/DuckDbHandler/ServiceRole/DefaultPolicy/Resource",
                                 "attributes": {
                                   "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
                                   "aws:cdk:cloudformation:props": {
@@ -1150,10 +1150,10 @@
                                       ],
                                       "Version": "2012-10-17"
                                     },
-                                    "policyName": "CloudDuckApiDuckDbServiceRoleDefaultPolicyAA548BF6",
+                                    "policyName": "CloudDuckApiDuckDbHandlerServiceRoleDefaultPolicy4281CEBB",
                                     "roles": [
                                       {
-                                        "Ref": "CloudDuckApiDuckDbServiceRoleF07CAB71"
+                                        "Ref": "CloudDuckApiDuckDbHandlerServiceRole328F1C11"
                                       }
                                     ]
                                   }
@@ -1177,11 +1177,11 @@
                       },
                       "Code": {
                         "id": "Code",
-                        "path": "TestStack/CloudDuck/Api/DuckDb/Code",
+                        "path": "TestStack/CloudDuck/Api/DuckDbHandler/Code",
                         "children": {
                           "Stage": {
                             "id": "Stage",
-                            "path": "TestStack/CloudDuck/Api/DuckDb/Code/Stage",
+                            "path": "TestStack/CloudDuck/Api/DuckDbHandler/Code/Stage",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.AssetStaging",
                               "version": "2.160.0"
@@ -1189,7 +1189,7 @@
                           },
                           "AssetBucket": {
                             "id": "AssetBucket",
-                            "path": "TestStack/CloudDuck/Api/DuckDb/Code/AssetBucket",
+                            "path": "TestStack/CloudDuck/Api/DuckDbHandler/Code/AssetBucket",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.aws_s3.BucketBase",
                               "version": "2.160.0"
@@ -1203,7 +1203,7 @@
                       },
                       "Resource": {
                         "id": "Resource",
-                        "path": "TestStack/CloudDuck/Api/DuckDb/Resource",
+                        "path": "TestStack/CloudDuck/Api/DuckDbHandler/Resource",
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
                           "aws:cdk:cloudformation:props": {
@@ -1211,7 +1211,7 @@
                               "s3Bucket": {
                                 "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
                               },
-                              "s3Key": "f8853b0bce7025ff03d64801f3807ec50c04043bad1287c4f35a92a97d6af717.zip"
+                              "s3Key": "6646c8c7e41bc3d652a926516bcb0b761bc2573b255c4a58b3197713cfd9215b.zip"
                             },
                             "environment": {
                               "variables": {
@@ -1227,12 +1227,12 @@
                             "memorySize": 2048,
                             "role": {
                               "Fn::GetAtt": [
-                                "CloudDuckApiDuckDbServiceRoleF07CAB71",
+                                "CloudDuckApiDuckDbHandlerServiceRole328F1C11",
                                 "Arn"
                               ]
                             },
                             "runtime": "nodejs20.x",
-                            "timeout": 300
+                            "timeout": 900
                           }
                         },
                         "constructInfo": {
@@ -1242,7 +1242,7 @@
                       }
                     },
                     "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_lambda_nodejs.NodejsFunction",
+                      "fqn": "aws-cdk-lib.aws_lambda.Function",
                       "version": "2.160.0"
                     }
                   },
@@ -1796,13 +1796,13 @@
                       "version": "2.160.0"
                     }
                   },
-                  "Source-Users--kazuhoshinozuka--git--cloud-duck--src--frontend": {
-                    "id": "Source-Users--kazuhoshinozuka--git--cloud-duck--src--frontend",
-                    "path": "TestStack/CloudDuck/Build/Source-Users--kazuhoshinozuka--git--cloud-duck--src--frontend",
+                  "Source-Users--kazuhoshinozuka--git--cloud-duck--frontend": {
+                    "id": "Source-Users--kazuhoshinozuka--git--cloud-duck--frontend",
+                    "path": "TestStack/CloudDuck/Build/Source-Users--kazuhoshinozuka--git--cloud-duck--frontend",
                     "children": {
                       "Stage": {
                         "id": "Stage",
-                        "path": "TestStack/CloudDuck/Build/Source-Users--kazuhoshinozuka--git--cloud-duck--src--frontend/Stage",
+                        "path": "TestStack/CloudDuck/Build/Source-Users--kazuhoshinozuka--git--cloud-duck--frontend/Stage",
                         "constructInfo": {
                           "fqn": "aws-cdk-lib.AssetStaging",
                           "version": "2.160.0"
@@ -1810,7 +1810,7 @@
                       },
                       "AssetBucket": {
                         "id": "AssetBucket",
-                        "path": "TestStack/CloudDuck/Build/Source-Users--kazuhoshinozuka--git--cloud-duck--src--frontend/AssetBucket",
+                        "path": "TestStack/CloudDuck/Build/Source-Users--kazuhoshinozuka--git--cloud-duck--frontend/AssetBucket",
                         "constructInfo": {
                           "fqn": "aws-cdk-lib.aws_s3.BucketBase",
                           "version": "2.160.0"

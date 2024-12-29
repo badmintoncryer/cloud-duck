@@ -33,7 +33,7 @@
   ],
   "exclude": [
     "node_modules",
-    "src/frontend/**/*",
-    "test/.*.snapshot/**/*"
+    "frontend/**/*",
+    "test/*.snapshot/**/*"
   ]
 }

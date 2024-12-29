@@ -32,7 +32,7 @@ jspm_packages/
 .cache
 *.js
 *.d.ts
-!test/.*.snapshot/**/*
+!test/*.snapshot/**/*
 .tmp
 !remix.config.js
 !postcss.config.js
@@ -52,6 +52,7 @@ junit.xml
 !/src/
 /lib
 /dist/
+!/.eslintrc.json
 .jsii
 tsconfig.json
 !/API.md

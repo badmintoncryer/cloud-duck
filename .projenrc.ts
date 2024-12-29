@@ -10,7 +10,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   projenrcTs: true,
   repositoryUrl: 'https://github.com/badmintoncryer/cloud-duck.git',
   keywords: ['aws', 'cdk', 's3', 'duckdb', 'cognito'],
-  gitignore: ['*.js', '*.d.ts', '!test/.*.snapshot/**/*', '.tmp', '!remix.config.js', '!postcss.config.js'],
+  gitignore: ['*.js', '*.d.ts', '!test/*.snapshot/**/*', '.tmp', '!remix.config.js', '!postcss.config.js'],
   deps: ['deploy-time-build'],
   description: 'CDK construct for creating an analysis environment using DuckDB for S3 data',
   devDeps: [
@@ -33,18 +33,18 @@ const project = new awscdk.AwsCdkConstructLibrary({
     '@remix-run/node',
     'esbuild',
   ],
-  excludeTypescript: ['src/frontend/**/*.ts', 'test/.*.snapshot/**/*'],
+  excludeTypescript: ['frontend/**/*.ts', 'test/.*.snapshot/**/*'],
   packageManager: NodePackageManager.PNPM,
   tsconfig: {
-    exclude: ['src/frontend/**/*', 'test/.*.snapshot/**/*'],
+    exclude: ['frontend/**/*', 'test/*.snapshot/**/*', 'node_modules'],
   },
   tsconfigDev: {
-    exclude: ['src/frontend/**/*', 'test/.*.snapshot/**/*'],
+    exclude: ['frontend/**/*', 'test/*.snapshot/**/*', 'node_modules'],
   },
-  eslint: false,
+  eslint: true,
   eslintOptions: {
     dirs: ['src'],
-    ignorePatterns: ['*.js', '*.d.ts', 'node_modules/', '*.generated.ts', 'coverage', 'src/frontend/**/*.ts', 'test/.*.snapshot/**/*'],
+    ignorePatterns: ['*.js', '*.d.ts', 'node_modules/', '*.generated.ts', 'coverage', 'test/*.snapshot/**/*'],
   },
   releaseToNpm: true,
   packageName: 'cloud-duck',
@@ -56,7 +56,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
 project.projectBuild.compileTask.prependExec('npm ci && npm run build', {
   cwd: 'lambda/duckdb',
 });
-// project.projectBuild.testTask.exec(
-//   'pnpm tsc -p tsconfig.dev.json && pnpm integ-runner',
-// );
+project.projectBuild.testTask.exec(
+  'pnpm tsc -p tsconfig.dev.json && pnpm integ-runner',
+);
 project.synth();
