@@ -1,10 +1,6 @@
 {
   "dependencies": [
     {
-      "name": "@aws-amplify/auth",
-      "type": "build"
-    },
-    {
       "name": "@aws-cdk/integ-runner",
       "version": "2.160.0-alpha.0",
       "type": "build"
@@ -15,23 +11,7 @@
       "type": "build"
     },
     {
-      "name": "@aws-sdk/client-cognito-identity",
-      "type": "build"
-    },
-    {
       "name": "@aws-sdk/client-s3",
-      "type": "build"
-    },
-    {
-      "name": "@aws-sdk/credential-provider-cognito-identity",
-      "type": "build"
-    },
-    {
-      "name": "@remix-run/dev",
-      "type": "build"
-    },
-    {
-      "name": "@remix-run/node",
       "type": "build"
     },
     {
@@ -62,20 +42,8 @@
       "type": "build"
     },
     {
-      "name": "aws-amplify",
-      "type": "build"
-    },
-    {
-      "name": "aws-lambda",
-      "type": "build"
-    },
-    {
       "name": "commit-and-tag-version",
       "version": "^12",
-      "type": "build"
-    },
-    {
-      "name": "duckdb",
       "type": "build"
     },
     {
@@ -132,18 +100,6 @@
       "type": "build"
     },
     {
-      "name": "react",
-      "type": "build"
-    },
-    {
-      "name": "tailwind-merge",
-      "type": "build"
-    },
-    {
-      "name": "tailwindcss",
-      "type": "build"
-    },
-    {
       "name": "ts-jest",
       "type": "build"
     },
@@ -153,14 +109,6 @@
     },
     {
       "name": "typescript",
-      "type": "build"
-    },
-    {
-      "name": "vite",
-      "type": "build"
-    },
-    {
-      "name": "vite-tsconfig-paths",
       "type": "build"
     },
     {
