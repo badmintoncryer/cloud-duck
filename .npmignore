@@ -20,6 +20,7 @@ dist
 /.idea/
 /.projenrc.js
 tsconfig.tsbuildinfo
+/.eslintrc.json
 !.jsii
 /.gitattributes
 /.projenrc.ts

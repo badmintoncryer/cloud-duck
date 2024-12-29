@@ -1,12 +1,12 @@
-import { Construct } from "constructs";
-import { CfnOutput, Lazy, RemovalPolicy, Size, Stack } from "aws-cdk-lib";
-import * as cloudfront from "aws-cdk-lib/aws-cloudfront";
-import * as origins from "aws-cdk-lib/aws-cloudfront-origins";
-import * as s3 from "aws-cdk-lib/aws-s3";
-import { NodejsBuild } from "deploy-time-build";
-import * as path from "node:path";
-import { Cognito } from "./constructs/cognito";
-import { Api } from "./constructs/api";
+import * as path from 'node:path';
+import { CfnOutput, Lazy, RemovalPolicy, Size, Stack } from 'aws-cdk-lib';
+import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
+import * as origins from 'aws-cdk-lib/aws-cloudfront-origins';
+import * as s3 from 'aws-cdk-lib/aws-s3';
+import { Construct } from 'constructs';
+import { NodejsBuild } from 'deploy-time-build';
+import { Api } from './constructs/api';
+import { Cognito } from './constructs/cognito';
 
 /**
  * Props for the CloudDuck construct
@@ -37,23 +37,23 @@ export class CloudDuck extends Construct {
 
     let distributionDomainName = '';
 
-    const cognito = new Cognito(this, "Cognito", {
+    const cognito = new Cognito(this, 'Cognito', {
       callbackUrls: [Lazy.string({ produce: () => `https://${distributionDomainName}` })],
       logoutUrls: [Lazy.string({ produce: () => `https://${distributionDomainName}` })],
     });
 
-    const api = new Api(this, "Api", {
+    const api = new Api(this, 'Api', {
       userPool: cognito.userPool,
       targetBuckets: props?.targetBuckets,
       memory: props?.memory,
     });
 
-    const hostingBucket = new s3.Bucket(this, "HostingBucket", {
+    const hostingBucket = new s3.Bucket(this, 'HostingBucket', {
       removalPolicy: RemovalPolicy.DESTROY,
       autoDeleteObjects: true,
     });
-    const distribution = new cloudfront.Distribution(this, "CloudFront", {
-      defaultRootObject: "index.html",
+    const distribution = new cloudfront.Distribution(this, 'CloudFront', {
+      defaultRootObject: 'index.html',
       defaultBehavior: {
         origin: origins.S3BucketOrigin.withOriginAccessControl(hostingBucket),
         responseHeadersPolicy: cloudfront.ResponseHeadersPolicy.CORS_ALLOW_ALL_ORIGINS,
@@ -84,17 +84,17 @@ export class CloudDuck extends Construct {
     });
     distributionDomainName = distribution.distributionDomainName;
 
-    new NodejsBuild(this, "Build", {
+    new NodejsBuild(this, 'Build', {
       assets: [
         {
-          path: path.join(__dirname, "../frontend"),
-          exclude: ["node_modules", "build"],
-        }
+          path: path.join(__dirname, '../frontend'),
+          exclude: ['node_modules', 'build'],
+        },
       ],
       destinationBucket: hostingBucket,
       distribution,
-      outputSourceDirectory: "build/client",
-      buildCommands: ["npm ci", "npm run build"],
+      outputSourceDirectory: 'build/client',
+      buildCommands: ['npm ci', 'npm run build'],
       buildEnvironment: {
         VITE_COGNITO_USER_POOL_ID: cognito.userPool.userPoolId,
         VITE_COGNITO_USER_POOL_CLIENT_ID: cognito.appClient.userPoolClientId,
@@ -102,10 +102,10 @@ export class CloudDuck extends Construct {
         VITE_API_ROOT: `${api.api.url}v1`,
         VITE_AWS_ACCOUNT_ID: Stack.of(this).account,
         // VITE_API_ROOT: `https://${distributionDomainName}/api/v1`,
-      }
-    })
+      },
+    });
 
-    new CfnOutput(this, "DistributionUrl", {
+    new CfnOutput(this, 'DistributionUrl', {
       value: `https://${distributionDomainName}`,
     });
   }

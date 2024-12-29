@@ -19,7 +19,7 @@
         "notificationArns": [],
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/987ff82c54c10944c0309df80d397183a427a9778888db49c6013f4e4ebd3998.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/4f1e5685003edb17452b2a8bf74fc092d3b4ae2999f6f55ed2613e0c6f168b29.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -104,7 +104,7 @@
         "/TestStack/CloudDuck/Api/Api/Deployment/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "CloudDuckApiDeployment843CB85A6bfee5a23525edbd4194df89bbee99a9"
+            "data": "CloudDuckApiDeployment843CB85A3b0ba1b48ed2c50ecd4ecaf8301edc74"
           }
         ],
         "/TestStack/CloudDuck/Api/Api/DeploymentStage.api/Resource": [
@@ -197,22 +197,22 @@
             "data": "CloudDuckApiDuckDbBucketAutoDeleteObjectsCustomResourceE3471089"
           }
         ],
-        "/TestStack/CloudDuck/Api/DuckDb/ServiceRole/Resource": [
+        "/TestStack/CloudDuck/Api/DuckDbHandler/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "CloudDuckApiDuckDbServiceRoleF07CAB71"
+            "data": "CloudDuckApiDuckDbHandlerServiceRole328F1C11"
           }
         ],
-        "/TestStack/CloudDuck/Api/DuckDb/ServiceRole/DefaultPolicy/Resource": [
+        "/TestStack/CloudDuck/Api/DuckDbHandler/ServiceRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "CloudDuckApiDuckDbServiceRoleDefaultPolicyAA548BF6"
+            "data": "CloudDuckApiDuckDbHandlerServiceRoleDefaultPolicy4281CEBB"
           }
         ],
-        "/TestStack/CloudDuck/Api/DuckDb/Resource": [
+        "/TestStack/CloudDuck/Api/DuckDbHandler/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "CloudDuckApiDuckDb452CF02A"
+            "data": "CloudDuckApiDuckDbHandler72CC6FC1"
           }
         ],
         "/TestStack/CloudDuck/HostingBucket/Resource": [

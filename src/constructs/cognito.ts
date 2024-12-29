@@ -1,6 +1,6 @@
-import { Construct } from "constructs";
-import * as cognito from "aws-cdk-lib/aws-cognito";
-import { CfnOutput, RemovalPolicy } from "aws-cdk-lib";
+import { CfnOutput, RemovalPolicy } from 'aws-cdk-lib';
+import * as cognito from 'aws-cdk-lib/aws-cognito';
+import { Construct } from 'constructs';
 
 export interface CognitoProps {
   userpool?: cognito.IUserPool;
@@ -15,7 +15,7 @@ export class Cognito extends Construct {
   constructor(scope: Construct, id: string, props?: CognitoProps) {
     super(scope, id);
 
-    this.userPool = props?.userpool ?? new cognito.UserPool(this, "UserPool", {
+    this.userPool = props?.userpool ?? new cognito.UserPool(this, 'UserPool', {
       selfSignUpEnabled: false,
       signInAliases: {
         email: true,
@@ -26,7 +26,7 @@ export class Cognito extends Construct {
       removalPolicy: RemovalPolicy.DESTROY,
     });
 
-    this.appClient = this.userPool.addClient("Client", {
+    this.appClient = this.userPool.addClient('Client', {
       generateSecret: false,
       authFlows: {
         userSrp: true,
@@ -44,7 +44,7 @@ export class Cognito extends Construct {
       preventUserExistenceErrors: true,
     });
 
-    new CfnOutput(this, "UserPoolId", {
+    new CfnOutput(this, 'UserPoolId', {
       value: this.userPool.userPoolId,
     });
   }
