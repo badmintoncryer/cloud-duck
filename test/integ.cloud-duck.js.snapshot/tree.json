@@ -1222,7 +1222,18 @@
                             },
                             "handler": "index.handler",
                             "layers": [
-                              "arn:aws:lambda:us-east-1:041475135427:layer:duckdb-nodejs-x86:14"
+                              {
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    "arn:aws:lambda:",
+                                    {
+                                      "Ref": "AWS::Region"
+                                    },
+                                    ":041475135427:layer:duckdb-nodejs-x86:14"
+                                  ]
+                                ]
+                              }
                             ],
                             "memorySize": 2048,
                             "role": {
