@@ -12,8 +12,12 @@ const syncS3WithLocal = async (s3Client: S3Client, bucket: string, prefix: strin
   const filesToDelete = s3Keys.filter(key => !localFiles.includes(key));
   // ローカルに存在しないファイルを S3 から削除
   for (const key of filesToDelete) {
-    await s3Client.send(new DeleteObjectCommand({ Bucket: bucket, Key: key }));
-    console.log(`Deleted file from S3: ${key}`);
+    try {
+      await s3Client.send(new DeleteObjectCommand({ Bucket: bucket, Key: key }));
+      console.log(`Deleted file from S3: ${key}`);
+    } catch (error) {
+      console.log(`Error deleting file from S3: ${key}`);
+    }
   }
 };
 
@@ -53,12 +57,16 @@ const uploadFilesToS3 = async (s3Client: S3Client, bucket: string, prefix: strin
 
     if (stats.isFile() && fs.existsSync(entryPath)) {
       const fileContent = fs.readFileSync(entryPath);
-      await s3Client.send(new PutObjectCommand({
-        Bucket: bucket,
-        Key: `${prefix}/${entry}`,
-        Body: fileContent,
-      }));
-      console.log(`Uploaded file to S3: ${entryPath}`);
+      try {
+        await s3Client.send(new PutObjectCommand({
+          Bucket: bucket,
+          Key: `${prefix}/${entry}`,
+          Body: fileContent,
+        }));
+        console.log(`Uploaded file to S3: ${entryPath}`);
+      } catch (error) {
+        console.log(`Error uploading file to S3: ${entryPath}`);
+      }
     } else {
       console.log(`Skipping non-file entry: ${entryPath}`);
     }
