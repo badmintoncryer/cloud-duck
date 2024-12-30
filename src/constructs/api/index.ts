@@ -1,5 +1,5 @@
 import * as path from 'node:path';
-import { RemovalPolicy, Size, Duration } from 'aws-cdk-lib';
+import { RemovalPolicy, Size, Duration, Stack } from 'aws-cdk-lib';
 import * as apigateway from 'aws-cdk-lib/aws-apigateway';
 import * as cognito from 'aws-cdk-lib/aws-cognito';
 import * as iam from 'aws-cdk-lib/aws-iam';
@@ -85,9 +85,14 @@ export class Api extends Construct {
       }),
     );
     duckdbBucket.grantReadWrite(duckdbHandler);
+
+    // uses duckdb-nodejs-layer
+    // https://github.com/tobilg/duckdb-nodejs-layer
+    const layerArn = `arn:aws:lambda:${Stack.of(this).region}:041475135427:layer:duckdb-nodejs-x86:14`;
     duckdbHandler.addLayers(lambda.LayerVersion.fromLayerVersionArn(
-      this, 'DuckdbLayer', 'arn:aws:lambda:us-east-1:041475135427:layer:duckdb-nodejs-x86:14',
+      this, 'DuckdbLayer', layerArn,
     ));
+
     const duckdb = resource.addResource('duckdb');
     duckdb.addMethod(
       'POST',
