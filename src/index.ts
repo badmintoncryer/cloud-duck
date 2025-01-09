@@ -2,6 +2,7 @@ import * as path from 'node:path';
 import { CfnOutput, Lazy, RemovalPolicy, Size, Stack } from 'aws-cdk-lib';
 import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
 import * as origins from 'aws-cdk-lib/aws-cloudfront-origins';
+import * as cognito from 'aws-cdk-lib/aws-cognito';
 import * as s3 from 'aws-cdk-lib/aws-s3';
 import { Construct } from 'constructs';
 import { NodejsBuild } from 'deploy-time-build';
@@ -24,6 +25,13 @@ export interface CloudDuckProps {
    * @default - 1024 MiB
    */
   readonly memory?: Size;
+
+  /**
+   * The Cognito UserPool props
+   *
+   * @default - selfSignUpEnabled: false, signInAliases: { email: true }, autoVerify: { email: true }, removalPolicy: RemovalPolicy.DESTROY
+   */
+  readonly userPoolProps?: cognito.UserPoolProps;
 }
 
 /**
@@ -37,13 +45,14 @@ export class CloudDuck extends Construct {
 
     let distributionDomainName = '';
 
-    const cognito = new Cognito(this, 'Cognito', {
+    const idp = new Cognito(this, 'Cognito', {
       callbackUrls: [Lazy.string({ produce: () => `https://${distributionDomainName}` })],
       logoutUrls: [Lazy.string({ produce: () => `https://${distributionDomainName}` })],
+      userPoolProps: props?.userPoolProps,
     });
 
     const api = new Api(this, 'Api', {
-      userPool: cognito.userPool,
+      userPool: idp.userPool,
       targetBuckets: props?.targetBuckets,
       memory: props?.memory,
     });
@@ -96,9 +105,9 @@ export class CloudDuck extends Construct {
       outputSourceDirectory: 'build/client',
       buildCommands: ['npm ci', 'npm run build'],
       buildEnvironment: {
-        VITE_COGNITO_USER_POOL_ID: cognito.userPool.userPoolId,
-        VITE_COGNITO_USER_POOL_CLIENT_ID: cognito.appClient.userPoolClientId,
-        VITE_COGNITO_REGION: cognito.userPool.stack.region,
+        VITE_COGNITO_USER_POOL_ID: idp.userPool.userPoolId,
+        VITE_COGNITO_USER_POOL_CLIENT_ID: idp.appClient.userPoolClientId,
+        VITE_COGNITO_REGION: idp.userPool.stack.region,
         VITE_API_ROOT: `${api.api.url}v1`,
         VITE_AWS_ACCOUNT_ID: Stack.of(this).account,
         // VITE_API_ROOT: `https://${distributionDomainName}/api/v1`,

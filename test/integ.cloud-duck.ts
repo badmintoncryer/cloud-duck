@@ -1,5 +1,6 @@
 import { IntegTest } from '@aws-cdk/integ-tests-alpha';
 import { App, RemovalPolicy, Size, Stack, StackProps } from 'aws-cdk-lib';
+// import * as cognito from 'aws-cdk-lib/aws-cognito';
 import * as s3 from 'aws-cdk-lib/aws-s3';
 import { CloudDuck } from '../src';
 
@@ -17,6 +18,13 @@ class TestStack extends Stack {
     new CloudDuck(this, 'CloudDuck', {
       targetBuckets: [targetBucket],
       memory: Size.gibibytes(2),
+      // userPoolProps: {
+      //   mfa: cognito.Mfa.REQUIRED,
+      //   mfaSecondFactor: {
+      //     sms: false,
+      //     otp: true,
+      //   },
+      // },
     });
   }
 }
