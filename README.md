@@ -42,8 +42,9 @@ npm i cloud-duck
 You can deploy the CloudDuck with the following code in the CDK stack.
 
 ```typescript
-import { Size } from 'aws-cdk-lib';
 import { CloudDuck } from 'cloud-duck';
+import { Size } from 'aws-cdk-lib';
+import * as cognito from 'aws-cdk-lib/aws-cognito';
 
 declare const logBucket: s3.IBucket;
 
@@ -55,6 +56,15 @@ new CloudDuck(this, 'CloudDuck', {
   // The memory size of the Lambda function
   // Default: 1024 MB
   memory: Size.mebibytes(1024),
+  // You can customize the Cognito User Pool
+  // For example, you can force the user to use MFA.
+  userPoolPlpos: {
+    mfa: cognito.Mfa.REQUIRED,
+    mfaSecondFactor: {
+      sms: false,
+      otp: true,
+    },
+  },
 });
 ```
 

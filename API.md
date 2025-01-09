@@ -125,6 +125,7 @@ const cloudDuckProps: CloudDuckProps = { ... }
 | --- | --- | --- |
 | <code><a href="#cloud-duck.CloudDuckProps.property.memory">memory</a></code> | <code>aws-cdk-lib.Size</code> | The amount of memory to allocate to the Lambda function. |
 | <code><a href="#cloud-duck.CloudDuckProps.property.targetBuckets">targetBuckets</a></code> | <code>aws-cdk-lib.aws_s3.Bucket[]</code> | The S3 buckets which the cloud duck will analyze. |
+| <code><a href="#cloud-duck.CloudDuckProps.property.userPoolProps">userPoolProps</a></code> | <code>aws-cdk-lib.aws_cognito.UserPoolProps</code> | The Cognito UserPool props. |
 
 ---
 
@@ -151,6 +152,19 @@ public readonly targetBuckets: Bucket[];
 - *Default:* All buckets in the account
 
 The S3 buckets which the cloud duck will analyze.
+
+---
+
+##### `userPoolProps`<sup>Optional</sup> <a name="userPoolProps" id="cloud-duck.CloudDuckProps.property.userPoolProps"></a>
+
+```typescript
+public readonly userPoolProps: UserPoolProps;
+```
+
+- *Type:* aws-cdk-lib.aws_cognito.UserPoolProps
+- *Default:* selfSignUpEnabled: false, signInAliases: { email: true }, autoVerify: { email: true }, removalPolicy: RemovalPolicy.DESTROY
+
+The Cognito UserPool props.
 
 ---
 

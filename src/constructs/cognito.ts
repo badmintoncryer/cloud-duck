@@ -6,6 +6,7 @@ export interface CognitoProps {
   userpool?: cognito.IUserPool;
   callbackUrls?: string[];
   logoutUrls?: string[];
+  userPoolProps?: cognito.UserPoolProps;
 }
 
 export class Cognito extends Construct {
@@ -24,6 +25,7 @@ export class Cognito extends Construct {
         email: true,
       },
       removalPolicy: RemovalPolicy.DESTROY,
+      ...props?.userPoolProps,
     });
 
     this.appClient = this.userPool.addClient('Client', {
