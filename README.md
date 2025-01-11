@@ -20,6 +20,25 @@ User authentication for access is implemented using Cognito, ensuring that only 
 ![Downloads](https://img.shields.io/badge/-DOWNLOADS:-brightgreen?color=gray)
 ![npm downloads](https://img.shields.io/npm/dt/cloud-duck?label=npm&color=blueviolet)
 
+## Detailed information
+
+In Japanese: [duckdbを用いたS3データ分析SaaSをCDKコンストラクトとして提供しました](https://nixieminton.hatenablog.com/entry/2025/01/02/113326)
+In english: [CDK construct for a SaaS that performs data analysis on S3 using DuckDB](https://dev.to/kazuho/cdk-construct-for-a-saas-that-performs-data-analysis-on-s3-using-duckdb-ebd)
+
+## Table of Contents
+
+- [Use Cases](#use-cases)
+- [Architecture](#architecture)
+- [Installation](#installation)
+- [Setup](#setup)
+  - [Deploy](#deploy)
+  - [Add user to the Cognito User Pool](#add-user-to-the-cognito-user-pool)
+  - [Access](#access)
+- [Usage](#usage)
+  - [Query](#query)
+  - [Persistence](#persistence)
+  - [Note](#note)
+
 ## Use Cases
 
 - When you want to request data analysis on S3 using DuckDB but prefer not to issue S3 access credentials to the analysts.
