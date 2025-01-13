@@ -22,8 +22,8 @@ User authentication for access is implemented using Cognito, ensuring that only 
 
 ## Detailed information
 
-In Japanese: [duckdbを用いたS3データ分析SaaSをCDKコンストラクトとして提供しました](https://nixieminton.hatenablog.com/entry/2025/01/02/113326)
-In english: [CDK construct for a SaaS that performs data analysis on S3 using DuckDB](https://dev.to/kazuho/cdk-construct-for-a-saas-that-performs-data-analysis-on-s3-using-duckdb-ebd)
+- In Japanese: [duckdbを用いたS3データ分析SaaSをCDKコンストラクトとして提供しました](https://nixieminton.hatenablog.com/entry/2025/01/02/113326)
+- In english: [CDK construct for a SaaS that performs data analysis on S3 using DuckDB](https://dev.to/kazuho/cdk-construct-for-a-saas-that-performs-data-analysis-on-s3-using-duckdb-ebd)
 
 ## Table of Contents
 
