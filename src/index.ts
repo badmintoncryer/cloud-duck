@@ -67,29 +67,6 @@ export class CloudDuck extends Construct {
         origin: origins.S3BucketOrigin.withOriginAccessControl(hostingBucket),
         responseHeadersPolicy: cloudfront.ResponseHeadersPolicy.CORS_ALLOW_ALL_ORIGINS,
       },
-      // additionalBehaviors: {
-      //   "/api/*": {
-      //     origin: new origins.RestApiOrigin(api.api, {
-      //       originPath: "/api",
-      //     }),
-      //     responseHeadersPolicy: new cloudfront.ResponseHeadersPolicy(scope, 'ResponsePolicy', {
-      //       corsBehavior: {
-      //         accessControlAllowCredentials: true,
-      //         accessControlAllowHeaders: ['Authorization', 'Content-Type'],
-      //         accessControlAllowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-      //         accessControlAllowOrigins: [
-      //           // `https://${this.domainName}`,
-      //           "*"
-      //         ],
-      //         originOverride: true
-      //       }
-      //     }),
-      //     cachePolicy: cloudfront.CachePolicy.CACHING_DISABLED,
-      //     viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.HTTPS_ONLY,
-      //     allowedMethods: cloudfront.AllowedMethods.ALLOW_ALL,
-      //     originRequestPolicy: cloudfront.OriginRequestPolicy.ALL_VIEWER_EXCEPT_HOST_HEADER,
-      //   },
-      // },
     });
     distributionDomainName = distribution.distributionDomainName;
 
@@ -110,7 +87,6 @@ export class CloudDuck extends Construct {
         VITE_COGNITO_REGION: idp.userPool.stack.region,
         VITE_API_ROOT: `${api.api.url}v1`,
         VITE_AWS_ACCOUNT_ID: Stack.of(this).account,
-        // VITE_API_ROOT: `https://${distributionDomainName}/api/v1`,
       },
     });
 
