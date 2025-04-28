@@ -5,7 +5,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   authorAddress: 'malaysia.cryer@gmail.com',
   cdkVersion: '2.160.0',
   defaultReleaseBranch: 'main',
-  jsiiVersion: '~5.6.0',
+  jsiiVersion: '~5.8.0',
   name: 'cloud-duck',
   projenrcTs: true,
   repositoryUrl: 'https://github.com/badmintoncryer/cloud-duck.git',
@@ -37,7 +37,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   packageName: 'cloud-duck',
   publishToPypi: {
     distName: 'cloud-duck',
-    module: 'cloud-duck',
+    module: 'cloud_duck',
   },
 });
 project.projectBuild.compileTask.prependExec('npm ci && npm run build', {
