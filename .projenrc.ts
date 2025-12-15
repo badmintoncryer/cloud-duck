@@ -22,6 +22,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   ],
   excludeTypescript: ['frontend/**/*.ts', 'test/.*.snapshot/**/*'],
   packageManager: NodePackageManager.PNPM,
+  pnpmVersion: '9',
   tsconfig: {
     exclude: ['frontend/**/*', 'test/*.snapshot/**/*', 'node_modules'],
   },
