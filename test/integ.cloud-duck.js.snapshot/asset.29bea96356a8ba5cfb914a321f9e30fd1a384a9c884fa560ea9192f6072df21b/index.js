@@ -1,3 +1,4 @@
+"use strict";
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -16,20 +17,27 @@ var __copyProps = (to, from, except, desc) => {
   }
   return to;
 };
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+  // If the importer is in node compatibility mode or this is not an ESM
+  // file that has been converted to a CommonJS file using a Babel-
+  // compatible transform (i.e. "__esModule" has not been set), then set
+  // "default" to the CommonJS "module.exports" for node compatibility.
+  isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
+  mod
+));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // index.ts
-var trigger_codebuild_exports = {};
-__export(trigger_codebuild_exports, {
+var index_exports = {};
+__export(index_exports, {
   handler: () => handler
 });
-module.exports = __toCommonJS(trigger_codebuild_exports);
+module.exports = __toCommonJS(index_exports);
 var import_client_codebuild = require("@aws-sdk/client-codebuild");
 var import_crypto = __toESM(require("crypto"));
+var import_promises = require("timers/promises");
 var cb = new import_client_codebuild.CodeBuildClient({});
 var handler = async (event, context) => {
-  console.log(JSON.stringify(event));
   try {
     if (event.RequestType == "Create" || event.RequestType == "Update") {
       const props = event.ResourceProperties;
@@ -61,11 +69,13 @@ var handler = async (event, context) => {
               ...commonEnvironments,
               {
                 name: "input",
-                value: JSON.stringify(props.sources.map((source) => ({
-                  assetUrl: `s3://${source.sourceBucketName}/${source.sourceObjectKey}`,
-                  extractPath: source.extractPath,
-                  commands: (source.commands ?? []).join(" && ")
-                })))
+                value: JSON.stringify(
+                  props.sources.map((source) => ({
+                    assetUrl: `s3://${source.sourceBucketName}/${source.sourceObjectKey}`,
+                    extractPath: source.extractPath,
+                    commands: (source.commands ?? []).join(" && ")
+                  }))
+                )
               },
               {
                 name: "buildCommands",
@@ -77,6 +87,7 @@ var handler = async (event, context) => {
               },
               {
                 name: "destinationObjectKey",
+                // This should be random to always trigger a BucketDeployment update process
                 value: `${newPhysicalId}.zip`
               },
               {
@@ -130,7 +141,32 @@ var handler = async (event, context) => {
             ]
           });
           break;
+        case "SociIndexV2Build":
+          command = new import_client_codebuild.StartBuildCommand({
+            projectName: props.codeBuildProjectName,
+            environmentVariablesOverride: [
+              ...commonEnvironments,
+              {
+                name: "repositoryName",
+                value: props.repositoryName
+              },
+              {
+                name: "inputImageTag",
+                value: props.inputImageTag
+              },
+              {
+                name: "outputImageTag",
+                value: props.outputImageTag
+              },
+              {
+                name: "projectName",
+                value: props.codeBuildProjectName
+              }
+            ]
+          });
+          break;
         case "ContainerImageBuild": {
+          const imageTag = props.imageTag ?? `${props.tagPrefix ?? ""}${newPhysicalId}`;
           command = new import_client_codebuild.StartBuildCommand({
             projectName: props.codeBuildProjectName,
             environmentVariablesOverride: [
@@ -144,12 +180,16 @@ var handler = async (event, context) => {
                 value: props.repositoryUri.split("/")[0]
               },
               {
+                name: "repositoryRegion",
+                value: props.repositoryUri.split(".")[3]
+              },
+              {
                 name: "buildCommand",
                 value: props.buildCommand
               },
               {
                 name: "imageTag",
-                value: props.imageTag
+                value: imageTag
               },
               {
                 name: "projectName",
@@ -166,7 +206,21 @@ var handler = async (event, context) => {
         default:
           throw new Error(`invalid event type ${props}}`);
       }
-      const build = await cb.send(command);
+      let retries = 0;
+      while (retries < 10) {
+        try {
+          await cb.send(command);
+          break;
+        } catch (error) {
+          if (error.name === "AccessDeniedException") {
+            retries++;
+            console.log(`AccessDeniedException encountered, retrying (${retries})...`);
+            await (0, import_promises.setTimeout)(5e3);
+          } else {
+            throw error;
+          }
+        }
+      }
     } else {
       await sendStatus("SUCCESS", event, context);
     }
@@ -186,6 +240,7 @@ var sendStatus = async (status, event, context, reason) => {
     LogicalResourceId: event.LogicalResourceId,
     NoEcho: false,
     Data: {}
+    //responseData
   });
   await fetch(event.ResponseURL, {
     method: "PUT",

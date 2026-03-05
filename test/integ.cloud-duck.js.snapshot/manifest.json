@@ -19,7 +19,7 @@
         "notificationArns": [],
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/cce4152644f7d6a302ae937668c101fad41000701fe6b64b7ba79b57010efa9d.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/0c72e3ca33ea208c18adc58a410af239c92642f75f50eb5195ef2d07fb487942.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -275,10 +275,10 @@
             "data": "CloudDuckBuildDeployAwsCliLayerDCBC30A4"
           }
         ],
-        "/TestStack/CloudDuck/Build/Deploy/CustomResource/Default": [
+        "/TestStack/CloudDuck/Build/Deploy/CustomResource-512MiB/Default": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "CloudDuckBuildDeployCustomResourceB782F9CA"
+            "data": "CloudDuckBuildDeployCustomResource512MiBBE8101E7"
           }
         ],
         "/TestStack/CloudDuck/DistributionUrl": [
@@ -305,7 +305,7 @@
             "data": "NodejsBuildCustomResourceHandler25648b212c404f09aa65b6bbb0c446591C4101F8"
           }
         ],
-        "/TestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C": [
+        "/TestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiB": [
           {
             "type": "aws:cdk:is-custom-resource-handler-singleton",
             "data": true
@@ -315,22 +315,22 @@
             "data": 2
           }
         ],
-        "/TestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/Resource": [
+        "/TestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiB/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265"
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiBServiceRoleBA21DBC1"
           }
         ],
-        "/TestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy/Resource": [
+        "/TestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiB/ServiceRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF"
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiBServiceRoleDefaultPolicy96C3E726"
           }
         ],
-        "/TestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/Resource": [
+        "/TestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiB/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536"
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiB6723FB92"
           }
         ],
         "/TestStack/BootstrapVersion": [
@@ -343,6 +343,42 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "CheckBootstrapVersion"
+          }
+        ],
+        "CloudDuckApiCloudWatchRole132E2AFD": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CloudDuckApiCloudWatchRole132E2AFD",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
+        ],
+        "CloudDuckApiAccount3E858D30": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CloudDuckApiAccount3E858D30",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
+        ],
+        "CloudDuckApiDeployment843CB85Ab6a450e9e656ee2ccd399341cbda631b": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CloudDuckApiDeployment843CB85Ab6a450e9e656ee2ccd399341cbda631b",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
+          }
+        ],
+        "CDKMetadata": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata",
+            "trace": [
+              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
+            ]
           }
         ]
       },
