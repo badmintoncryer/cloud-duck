@@ -1,5 +1,5 @@
 {
-  "version": "38.0.1",
+  "version": "53.0.0",
   "artifacts": {
     "TestStack.assets": {
       "type": "cdk:asset-manifest",
@@ -16,10 +16,9 @@
         "templateFile": "TestStack.template.json",
         "terminationProtection": false,
         "validateOnSynth": false,
-        "notificationArns": [],
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/0c72e3ca33ea208c18adc58a410af239c92642f75f50eb5195ef2d07fb487942.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/324266bf284d4a40a97b8b50af6d8799decf07a1347f5c88b6cbe52baa649b23.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -35,16 +34,39 @@
         "TestStack.assets"
       ],
       "metadata": {
+        "/TestStack/TargetBucket": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "removalPolicy": "destroy",
+              "autoDeleteObjects": true
+            }
+          }
+        ],
         "/TestStack/TargetBucket/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "TargetBucket6BBF3429"
           }
         ],
+        "/TestStack/TargetBucket/Policy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "bucket": "*"
+            }
+          }
+        ],
         "/TestStack/TargetBucket/Policy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "TargetBucketPolicyDDA8DC0A"
+          }
+        ],
+        "/TestStack/TargetBucket/AutoDeleteObjectsCustomResource": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
           }
         ],
         "/TestStack/TargetBucket/AutoDeleteObjectsCustomResource/Default": [
@@ -77,10 +99,48 @@
             "data": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F"
           }
         ],
+        "/TestStack/CloudDuck/Cognito/UserPool": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "selfSignUpEnabled": false,
+              "signInAliases": {
+                "email": true
+              },
+              "autoVerify": {
+                "email": true
+              },
+              "removalPolicy": "destroy"
+            }
+          }
+        ],
         "/TestStack/CloudDuck/Cognito/UserPool/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CloudDuckCognitoUserPool3448B54F"
+          }
+        ],
+        "/TestStack/CloudDuck/Cognito/UserPool/Client": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "userPool": "*",
+              "generateSecret": false,
+              "authFlows": {
+                "userSrp": true,
+                "userPassword": true,
+                "adminUserPassword": true
+              },
+              "oAuth": {
+                "callbackUrls": "*",
+                "logoutUrls": "*",
+                "flows": {
+                  "authorizationCodeGrant": true
+                },
+                "scopes": "*"
+              },
+              "preventUserExistenceErrors": true
+            }
           }
         ],
         "/TestStack/CloudDuck/Cognito/UserPool/Client/Resource": [
@@ -95,16 +155,123 @@
             "data": "CloudDuckCognitoUserPoolId2D258434"
           }
         ],
+        "/TestStack/CloudDuck/Api/Api": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "description": "*",
+              "deployOptions": {
+                "stageName": "*"
+              },
+              "defaultCorsPreflightOptions": {
+                "allowOrigins": "*",
+                "allowMethods": "*",
+                "allowHeaders": "*"
+              }
+            }
+          }
+        ],
         "/TestStack/CloudDuck/Api/Api/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CloudDuckApi7E40F488"
           }
         ],
+        "/TestStack/CloudDuck/Api/Api/Deployment": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "description": "*",
+              "api": "*",
+              "retainDeployments": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToLogicalId": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToLogicalId": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToLogicalId": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToLogicalId": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToLogicalId": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToLogicalId": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToLogicalId": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToLogicalId": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToLogicalId": [
+                {}
+              ]
+            }
+          }
+        ],
         "/TestStack/CloudDuck/Api/Api/Deployment/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CloudDuckApiDeployment843CB85A3b0ba1b48ed2c50ecd4ecaf8301edc74"
+          }
+        ],
+        "/TestStack/CloudDuck/Api/Api/DeploymentStage.api": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "deployment": "*",
+              "stageName": "*"
+            }
           }
         ],
         "/TestStack/CloudDuck/Api/Api/DeploymentStage.api/Resource": [
@@ -119,10 +286,60 @@
             "data": "CloudDuckApiEndpoint38BFF0BB"
           }
         ],
+        "/TestStack/CloudDuck/Api/Api/Default": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
+        "/TestStack/CloudDuck/Api/Api/Default/OPTIONS": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "resource": "*",
+              "httpMethod": "*",
+              "integration": "*",
+              "options": {
+                "authorizer": {
+                  "authorizerId": "*",
+                  "authorizationType": "*"
+                },
+                "apiKeyRequired": false,
+                "authorizationType": "*",
+                "methodResponses": [
+                  {
+                    "statusCode": "*",
+                    "responseParameters": "*"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addMethodResponse": [
+                {
+                  "statusCode": "*",
+                  "responseParameters": "*"
+                }
+              ]
+            }
+          }
+        ],
         "/TestStack/CloudDuck/Api/Api/Default/OPTIONS/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CloudDuckApiOPTIONS4A5AB874"
+          }
+        ],
+        "/TestStack/CloudDuck/Api/Api/Default/v1": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "parent": "*",
+              "pathPart": "*"
+            }
           }
         ],
         "/TestStack/CloudDuck/Api/Api/Default/v1/Resource": [
@@ -131,10 +348,59 @@
             "data": "CloudDuckApiv1A843A6D9"
           }
         ],
+        "/TestStack/CloudDuck/Api/Api/Default/v1/OPTIONS": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "resource": "*",
+              "httpMethod": "*",
+              "integration": "*",
+              "options": {
+                "authorizer": {
+                  "authorizerId": "*",
+                  "authorizationType": "*"
+                },
+                "apiKeyRequired": false,
+                "authorizationType": "*",
+                "methodResponses": [
+                  {
+                    "statusCode": "*",
+                    "responseParameters": "*"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addMethodResponse": [
+                {
+                  "statusCode": "*",
+                  "responseParameters": "*"
+                }
+              ]
+            }
+          }
+        ],
         "/TestStack/CloudDuck/Api/Api/Default/v1/OPTIONS/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CloudDuckApiv1OPTIONS355D8B3F"
+          }
+        ],
+        "/TestStack/CloudDuck/Api/Api/Default/v1/GET": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "resource": "*",
+              "httpMethod": "*",
+              "integration": "*",
+              "options": {
+                "authorizer": "*",
+                "authorizationType": "*"
+              }
+            }
           }
         ],
         "/TestStack/CloudDuck/Api/Api/Default/v1/GET/Resource": [
@@ -143,16 +409,74 @@
             "data": "CloudDuckApiv1GET26F5E3B8"
           }
         ],
+        "/TestStack/CloudDuck/Api/Api/Default/v1/duckdb": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "parent": "*",
+              "pathPart": "*"
+            }
+          }
+        ],
         "/TestStack/CloudDuck/Api/Api/Default/v1/duckdb/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CloudDuckApiv1duckdb2BC0DF07"
           }
         ],
+        "/TestStack/CloudDuck/Api/Api/Default/v1/duckdb/OPTIONS": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "resource": "*",
+              "httpMethod": "*",
+              "integration": "*",
+              "options": {
+                "authorizer": {
+                  "authorizerId": "*",
+                  "authorizationType": "*"
+                },
+                "apiKeyRequired": false,
+                "authorizationType": "*",
+                "methodResponses": [
+                  {
+                    "statusCode": "*",
+                    "responseParameters": "*"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addMethodResponse": [
+                {
+                  "statusCode": "*",
+                  "responseParameters": "*"
+                }
+              ]
+            }
+          }
+        ],
         "/TestStack/CloudDuck/Api/Api/Default/v1/duckdb/OPTIONS/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CloudDuckApiv1duckdbOPTIONS9D78131C"
+          }
+        ],
+        "/TestStack/CloudDuck/Api/Api/Default/v1/duckdb/POST": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "resource": "*",
+              "httpMethod": "*",
+              "integration": "*",
+              "options": {
+                "authorizer": "*",
+                "authorizationType": "*"
+              }
+            }
           }
         ],
         "/TestStack/CloudDuck/Api/Api/Default/v1/duckdb/POST/ApiPermission.TestStackCloudDuckApi0E586E39.POST..v1.duckdb": [
@@ -173,10 +497,25 @@
             "data": "CloudDuckApiv1duckdbPOSTCB9A4C1D"
           }
         ],
+        "/TestStack/CloudDuck/Api/Authorizer": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
         "/TestStack/CloudDuck/Api/Authorizer/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CloudDuckApiAuthorizer2774E5FF"
+          }
+        ],
+        "/TestStack/CloudDuck/Api/DuckDbBucket": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "removalPolicy": "destroy",
+              "autoDeleteObjects": true
+            }
           }
         ],
         "/TestStack/CloudDuck/Api/DuckDbBucket/Resource": [
@@ -185,10 +524,24 @@
             "data": "CloudDuckApiDuckDbBucket64E19DBF"
           }
         ],
+        "/TestStack/CloudDuck/Api/DuckDbBucket/Policy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "bucket": "*"
+            }
+          }
+        ],
         "/TestStack/CloudDuck/Api/DuckDbBucket/Policy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CloudDuckApiDuckDbBucketPolicy8918E78F"
+          }
+        ],
+        "/TestStack/CloudDuck/Api/DuckDbBucket/AutoDeleteObjectsCustomResource": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
           }
         ],
         "/TestStack/CloudDuck/Api/DuckDbBucket/AutoDeleteObjectsCustomResource/Default": [
@@ -197,10 +550,132 @@
             "data": "CloudDuckApiDuckDbBucketAutoDeleteObjectsCustomResourceE3471089"
           }
         ],
+        "/TestStack/CloudDuck/Api/DuckDbHandler": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "runtime": "*",
+              "code": "*",
+              "handler": "*",
+              "timeout": "*",
+              "memorySize": "*",
+              "environment": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addEnvironment": [
+                "*",
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addLayers": [
+                "*"
+              ]
+            }
+          }
+        ],
+        "/TestStack/CloudDuck/Api/DuckDbHandler/ServiceRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "assumedBy": {
+                "principalAccount": "*",
+                "assumeRoleAction": "*"
+              },
+              "managedPolicies": [
+                {
+                  "managedPolicyArn": "*"
+                }
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/TestStack/CloudDuck/Api/DuckDbHandler/ServiceRole/ImportServiceRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
         "/TestStack/CloudDuck/Api/DuckDbHandler/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CloudDuckApiDuckDbHandlerServiceRole328F1C11"
+          }
+        ],
+        "/TestStack/CloudDuck/Api/DuckDbHandler/ServiceRole/DefaultPolicy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
           }
         ],
         "/TestStack/CloudDuck/Api/DuckDbHandler/ServiceRole/DefaultPolicy/Resource": [
@@ -215,10 +690,27 @@
             "data": "CloudDuckApiDuckDbHandler72CC6FC1"
           }
         ],
+        "/TestStack/CloudDuck/HostingBucket": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "removalPolicy": "destroy",
+              "autoDeleteObjects": true
+            }
+          }
+        ],
         "/TestStack/CloudDuck/HostingBucket/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CloudDuckHostingBucket07B2A949"
+          }
+        ],
+        "/TestStack/CloudDuck/HostingBucket/Policy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "bucket": "*"
+            }
           }
         ],
         "/TestStack/CloudDuck/HostingBucket/Policy/Resource": [
@@ -227,10 +719,36 @@
             "data": "CloudDuckHostingBucketPolicyEBCDF000"
           }
         ],
+        "/TestStack/CloudDuck/HostingBucket/AutoDeleteObjectsCustomResource": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
         "/TestStack/CloudDuck/HostingBucket/AutoDeleteObjectsCustomResource/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CloudDuckHostingBucketAutoDeleteObjectsCustomResourceF564F3AC"
+          }
+        ],
+        "/TestStack/CloudDuck/CloudFront": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "defaultRootObject": "*",
+              "defaultBehavior": {
+                "origin": "*",
+                "responseHeadersPolicy": {
+                  "responseHeadersPolicyId": "*"
+                }
+              }
+            }
+          }
+        ],
+        "/TestStack/CloudDuck/CloudFront/Origin1/S3OriginAccessControl": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
           }
         ],
         "/TestStack/CloudDuck/CloudFront/Origin1/S3OriginAccessControl/Resource": [
@@ -245,10 +763,161 @@
             "data": "CloudDuckCloudFront12AF4623"
           }
         ],
+        "/TestStack/CloudDuck/Build/CustomResourceHandler": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "runtime": "*",
+              "code": "*",
+              "handler": "*",
+              "uuid": "*",
+              "lambdaPurpose": "*",
+              "timeout": "*"
+            }
+          }
+        ],
+        "/TestStack/CloudDuck/Build/Project": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "environment": {
+                "buildImage": {
+                  "type": "*",
+                  "defaultComputeType": "BUILD_GENERAL1_SMALL",
+                  "imageId": "*",
+                  "imagePullPrincipalType": "CODEBUILD",
+                  "secretsManagerCredentials": "*",
+                  "repository": "*"
+                }
+              },
+              "buildSpec": "*"
+            }
+          }
+        ],
+        "/TestStack/CloudDuck/Build/Project/Role": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "roleName": "*",
+              "assumedBy": {
+                "principalAccount": "*",
+                "assumeRoleAction": "*"
+              }
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/TestStack/CloudDuck/Build/Project/Role/ImportRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
         "/TestStack/CloudDuck/Build/Project/Role/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CloudDuckBuildProjectRoleC5830BAC"
+          }
+        ],
+        "/TestStack/CloudDuck/Build/Project/Role/DefaultPolicy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
           }
         ],
         "/TestStack/CloudDuck/Build/Project/Role/DefaultPolicy/Resource": [
@@ -263,16 +932,84 @@
             "data": "CloudDuckBuildProject21141513"
           }
         ],
+        "/TestStack/CloudDuck/Build/Resource": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": "*"
+          }
+        ],
         "/TestStack/CloudDuck/Build/Resource/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CloudDuckBuildDE893DB8"
           }
         ],
+        "/TestStack/CloudDuck/Build/Deploy/AwsCliLayer": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {}
+          }
+        ],
         "/TestStack/CloudDuck/Build/Deploy/AwsCliLayer/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CloudDuckBuildDeployAwsCliLayerDCBC30A4"
+          }
+        ],
+        "/TestStack/CloudDuck/Build/Deploy/CustomResourceHandler": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "uuid": "*",
+              "layers": [
+                "*"
+              ],
+              "environment": "*",
+              "lambdaPurpose": "*",
+              "timeout": "*",
+              "role": "*",
+              "memorySize": "*",
+              "ephemeralStorageSize": "*",
+              "vpc": "*",
+              "vpcSubnets": "*",
+              "filesystem": "*",
+              "logGroup": "*",
+              "code": "*",
+              "handler": "*",
+              "runtime": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addMetadata": [
+                "*",
+                true
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addMetadata": [
+                "*",
+                "*"
+              ]
+            }
+          }
+        ],
+        "/TestStack/CloudDuck/Build/Deploy/CustomResource-512MiB": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
           }
         ],
         "/TestStack/CloudDuck/Build/Deploy/CustomResource-512MiB/Default": [
@@ -287,10 +1024,97 @@
             "data": "CloudDuckDistributionUrl84FC8296"
           }
         ],
+        "/TestStack/NodejsBuildCustomResourceHandler25648b212c404f09aa65b6bbb0c44659": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "runtime": "*",
+              "code": "*",
+              "handler": "*",
+              "timeout": "*"
+            }
+          }
+        ],
+        "/TestStack/NodejsBuildCustomResourceHandler25648b212c404f09aa65b6bbb0c44659/ServiceRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "assumedBy": {
+                "principalAccount": "*",
+                "assumeRoleAction": "*"
+              },
+              "managedPolicies": [
+                {
+                  "managedPolicyArn": "*"
+                }
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          }
+        ],
+        "/TestStack/NodejsBuildCustomResourceHandler25648b212c404f09aa65b6bbb0c44659/ServiceRole/ImportServiceRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
         "/TestStack/NodejsBuildCustomResourceHandler25648b212c404f09aa65b6bbb0c44659/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "NodejsBuildCustomResourceHandler25648b212c404f09aa65b6bbb0c44659ServiceRoleCB01FBE6"
+          }
+        ],
+        "/TestStack/NodejsBuildCustomResourceHandler25648b212c404f09aa65b6bbb0c44659/ServiceRole/DefaultPolicy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
           }
         ],
         "/TestStack/NodejsBuildCustomResourceHandler25648b212c404f09aa65b6bbb0c44659/ServiceRole/DefaultPolicy/Resource": [
@@ -307,6 +1131,43 @@
         ],
         "/TestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiB": [
           {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "layers": [
+                "*"
+              ],
+              "environment": "*",
+              "timeout": "*",
+              "role": "*",
+              "memorySize": "*",
+              "ephemeralStorageSize": "*",
+              "vpc": "*",
+              "vpcSubnets": "*",
+              "filesystem": "*",
+              "logGroup": "*",
+              "code": "*",
+              "handler": "*",
+              "runtime": "*"
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addEnvironment": [
+                "*",
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addLayers": [
+                "*"
+              ]
+            }
+          },
+          {
             "type": "aws:cdk:is-custom-resource-handler-singleton",
             "data": true
           },
@@ -315,10 +1176,118 @@
             "data": 2
           }
         ],
+        "/TestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiB/ServiceRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": {
+              "assumedBy": {
+                "principalAccount": "*",
+                "assumeRoleAction": "*"
+              },
+              "managedPolicies": [
+                {
+                  "managedPolicyArn": "*"
+                }
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachInlinePolicy": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addToPrincipalPolicy": [
+                {}
+              ]
+            }
+          }
+        ],
+        "/TestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiB/ServiceRole/ImportServiceRole": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          }
+        ],
         "/TestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiB/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiBServiceRoleBA21DBC1"
+          }
+        ],
+        "/TestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiB/ServiceRole/DefaultPolicy": [
+          {
+            "type": "aws:cdk:analytics:construct",
+            "data": "*"
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "attachToRole": [
+                "*"
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
+          },
+          {
+            "type": "aws:cdk:analytics:method",
+            "data": {
+              "addStatements": [
+                {}
+              ]
+            }
           }
         ],
         "/TestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiB/ServiceRole/DefaultPolicy/Resource": [
@@ -344,42 +1313,6 @@
             "type": "aws:cdk:logicalId",
             "data": "CheckBootstrapVersion"
           }
-        ],
-        "CloudDuckApiCloudWatchRole132E2AFD": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CloudDuckApiCloudWatchRole132E2AFD",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "CloudDuckApiAccount3E858D30": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CloudDuckApiAccount3E858D30",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "CloudDuckApiDeployment843CB85Ab6a450e9e656ee2ccd399341cbda631b": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CloudDuckApiDeployment843CB85Ab6a450e9e656ee2ccd399341cbda631b",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
-        ],
-        "CDKMetadata": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CDKMetadata",
-            "trace": [
-              "!!DESTRUCTIVE_CHANGES: WILL_DESTROY"
-            ]
-          }
         ]
       },
       "displayName": "TestStack"
@@ -399,7 +1332,6 @@
         "templateFile": "TestDefaultTestDeployAssert12909640.template.json",
         "terminationProtection": false,
         "validateOnSynth": false,
-        "notificationArns": [],
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
         "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/21fbb51d7b23f6a6c262b46a9caee79d744a3ac019fd45422d988b96d44b2a22.json",
@@ -439,5 +1371,6 @@
         "file": "tree.json"
       }
     }
-  }
+  },
+  "minimumCliVersion": "2.1109.0"
 }

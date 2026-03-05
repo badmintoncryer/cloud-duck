@@ -3,9 +3,9 @@ import { NodePackageManager } from 'projen/lib/javascript';
 const project = new awscdk.AwsCdkConstructLibrary({
   author: 'Kazuho CryerShinozuka',
   authorAddress: 'malaysia.cryer@gmail.com',
-  cdkVersion: '2.160.0',
+  cdkVersion: '2.197.0',
   defaultReleaseBranch: 'main',
-  jsiiVersion: '~5.6.0',
+  jsiiVersion: '~5.9.0',
   name: 'cloud-duck',
   projenrcTs: true,
   repositoryUrl: 'https://github.com/badmintoncryer/cloud-duck.git',
@@ -14,8 +14,8 @@ const project = new awscdk.AwsCdkConstructLibrary({
   deps: ['deploy-time-build'],
   description: 'CDK construct for creating an analysis environment using DuckDB for S3 data',
   devDeps: [
-    '@aws-cdk/integ-runner@2.160.0-alpha.0',
-    '@aws-cdk/integ-tests-alpha@2.160.0-alpha.0',
+    '@aws-cdk/integ-runner@2.197.2',
+    '@aws-cdk/integ-tests-alpha@2.197.0-alpha.0',
     '@aws-sdk/client-s3',
     '@types/aws-lambda',
     'esbuild',
@@ -37,7 +37,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   packageName: 'cloud-duck',
   publishToPypi: {
     distName: 'cloud-duck',
-    module: 'cloud-duck',
+    module: 'cloud_duck',
   },
 });
 project.projectBuild.compileTask.prependExec('npm ci && npm run build', {
