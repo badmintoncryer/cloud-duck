@@ -32,8 +32,12 @@ var syncS3WithLocal = async (s3Client2, bucket, prefix, localDir) => {
   const localFiles = fs.readdirSync(localDir).map((file) => `${prefix}/${file}`);
   const filesToDelete = s3Keys.filter((key) => !localFiles.includes(key));
   for (const key of filesToDelete) {
-    await s3Client2.send(new import_client_s3.DeleteObjectCommand({ Bucket: bucket, Key: key }));
-    console.log(`Deleted file from S3: ${key}`);
+    try {
+      await s3Client2.send(new import_client_s3.DeleteObjectCommand({ Bucket: bucket, Key: key }));
+      console.log(`Deleted file from S3: ${key}`);
+    } catch (error) {
+      console.log(`Error deleting file from S3: ${key}`);
+    }
   }
 };
 var getObjectFromS3 = async (s3Client2, bucket, key) => {
@@ -67,12 +71,16 @@ var uploadFilesToS3 = async (s3Client2, bucket, prefix, localDir) => {
     const stats = fs.statSync(entryPath);
     if (stats.isFile() && fs.existsSync(entryPath)) {
       const fileContent = fs.readFileSync(entryPath);
-      await s3Client2.send(new import_client_s3.PutObjectCommand({
-        Bucket: bucket,
-        Key: `${prefix}/${entry}`,
-        Body: fileContent
-      }));
-      console.log(`Uploaded file to S3: ${entryPath}`);
+      try {
+        await s3Client2.send(new import_client_s3.PutObjectCommand({
+          Bucket: bucket,
+          Key: `${prefix}/${entry}`,
+          Body: fileContent
+        }));
+        console.log(`Uploaded file to S3: ${entryPath}`);
+      } catch (error) {
+        console.log(`Error uploading file to S3: ${entryPath}`);
+      }
     } else {
       console.log(`Skipping non-file entry: ${entryPath}`);
     }

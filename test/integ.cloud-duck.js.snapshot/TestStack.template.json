@@ -802,7 +802,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "6646c8c7e41bc3d652a926516bcb0b761bc2573b255c4a58b3197713cfd9215b.zip"
+     "S3Key": "a92e3bb882c9cdedd9389b90aab52ce271105ac2f59eba7b6e6050089a3efc42.zip"
     },
     "Environment": {
      "Variables": {
@@ -850,7 +850,7 @@
       "Value": "true"
      },
      {
-      "Key": "aws-cdk:cr-owned:1f681077",
+      "Key": "aws-cdk:cr-owned:b5a17cfa",
       "Value": "true"
      }
     ]
@@ -1218,7 +1218,7 @@
      ]
     },
     "Source": {
-     "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"env\": {\n    \"shell\": \"bash\"\n  },\n  \"phases\": {\n    \"install\": {\n      \"runtime-versions\": {\n        \"nodejs\": 18\n      }\n    },\n    \"build\": {\n      \"commands\": [\n        \"current_dir=$(pwd)\",\n        \"\\necho \\\"$input\\\"\\nfor obj in $(echo \\\"$input\\\" | jq -r '.[] | @base64'); do\\n  decoded=$(echo \\\"$obj\\\" | base64 --decode)\\n  assetUrl=$(echo \\\"$decoded\\\" | jq -r '.assetUrl')\\n  extractPath=$(echo \\\"$decoded\\\" | jq -r '.extractPath')\\n  commands=$(echo \\\"$decoded\\\" | jq -r '.commands')\\n\\n  # Download the zip file\\n  aws s3 cp \\\"$assetUrl\\\" temp.zip\\n\\n  # Extract the zip file to the extractPath directory\\n  mkdir -p \\\"$extractPath\\\"\\n  unzip temp.zip -d \\\"$extractPath\\\"\\n\\n  # Remove the zip file\\n  rm temp.zip\\n\\n  # Run the specified commands in the extractPath directory\\n  cd \\\"$extractPath\\\"\\n  ls -la\\n  eval \\\"$commands\\\"\\n  cd \\\"$current_dir\\\"\\n  ls -la\\ndone\\n              \",\n        \"ls -la\",\n        \"cd \\\"$workingDirectory\\\"\",\n        \"eval \\\"$buildCommands\\\"\",\n        \"ls -la\",\n        \"cd \\\"$current_dir\\\"\",\n        \"cd \\\"$outputSourceDirectory\\\"\",\n        \"zip -r output.zip ./\",\n        \"aws s3 cp output.zip \\\"s3://$destinationBucketName/$destinationObjectKey\\\"\",\n        \"\\nif [[ $outputEnvFile == \\\"true\\\" ]]\\nthen\\n  # Split the comma-separated string into an array\\n  for var_name in ${envNames//,/ }\\n  do\\n      echo \\\"Element: $var_name\\\"\\n      var_value=\\\"${!var_name}\\\"\\n      echo \\\"$var_name=$var_value\\\" >> tmp.env\\n  done\\n\\n  aws s3 cp tmp.env \\\"s3://$destinationBucketName/$envFileKey\\\"\\nfi\\n              \"\n      ]\n    },\n    \"post_build\": {\n      \"commands\": [\n        \"echo Build completed on `date`\",\n        \"\\nSTATUS='SUCCESS'\\nif [ $CODEBUILD_BUILD_SUCCEEDING -ne 1 ] # Test if the build is failing\\nthen\\nSTATUS='FAILED'\\nREASON=\\\"NodejsBuild failed. See CloudWatch Log stream for the detailed reason: \\nhttps://$AWS_REGION.console.aws.amazon.com/cloudwatch/home?region=$AWS_REGION#logsV2:log-groups/log-group/\\\\$252Faws\\\\$252Fcodebuild\\\\$252F$projectName/log-events/$CODEBUILD_LOG_PATH\\\"\\nfi\\ncat <<EOF > payload.json\\n{\\n  \\\"StackId\\\": \\\"$stackId\\\",\\n  \\\"RequestId\\\": \\\"$requestId\\\",\\n  \\\"LogicalResourceId\\\":\\\"$logicalResourceId\\\",\\n  \\\"PhysicalResourceId\\\": \\\"$logicalResourceId\\\",\\n  \\\"Status\\\": \\\"$STATUS\\\",\\n  \\\"Reason\\\": \\\"$REASON\\\",\\n  \\\"Data\\\": {\\n    \\\"destinationObjectKey\\\": \\\"$destinationObjectKey\\\",\\n    \\\"envFileKey\\\": \\\"$envFileKey\\\"\\n  }\\n}\\nEOF\\ncurl -v -i -X PUT -H 'Content-Type:' -d \\\"@payload.json\\\" \\\"$responseURL\\\"\\n              \"\n      ]\n    }\n  }\n}",
+     "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"env\": {\n    \"shell\": \"bash\"\n  },\n  \"phases\": {\n    \"install\": {\n      \"runtime-versions\": {\n        \"nodejs\": 18\n      }\n    },\n    \"build\": {\n      \"commands\": [\n        \"current_dir=$(pwd)\",\n        \"\\necho \\\"$input\\\"\\nfor obj in $(echo \\\"$input\\\" | jq -r '.[] | @base64'); do\\n  decoded=$(echo \\\"$obj\\\" | base64 --decode)\\n  assetUrl=$(echo \\\"$decoded\\\" | jq -r '.assetUrl')\\n  extractPath=$(echo \\\"$decoded\\\" | jq -r '.extractPath')\\n  commands=$(echo \\\"$decoded\\\" | jq -r '.commands')\\n\\n  # Download the zip file\\n  aws s3 cp \\\"$assetUrl\\\" temp.zip\\n\\n  # Extract the zip file to the extractPath directory\\n  mkdir -p \\\"$extractPath\\\"\\n  unzip temp.zip -d \\\"$extractPath\\\"\\n\\n  # Remove the zip file\\n  rm temp.zip\\n\\n  # Run the specified commands in the extractPath directory\\n  cd \\\"$extractPath\\\"\\n  ls -la\\n  eval \\\"$commands\\\"\\n  cd \\\"$current_dir\\\"\\n  ls -la\\ndone\\n              \",\n        \"ls -la\",\n        \"cd \\\"$workingDirectory\\\"\",\n        \"eval \\\"$buildCommands\\\"\",\n        \"ls -la\",\n        \"cd \\\"$current_dir\\\"\",\n        \"cd \\\"$outputSourceDirectory\\\"\",\n        \"zip -r output.zip ./\",\n        \"aws s3 cp output.zip \\\"s3://$destinationBucketName/$destinationObjectKey\\\"\",\n        \"\\nif [[ $outputEnvFile == \\\"true\\\" ]]\\nthen\\n  # Split the comma-separated string into an array\\n  for var_name in ${envNames//,/ }\\n  do\\n      echo \\\"Element: $var_name\\\"\\n      var_value=\\\"${!var_name}\\\"\\n      echo \\\"$var_name=$var_value\\\" >> tmp.env\\n  done\\n\\n  aws s3 cp tmp.env \\\"s3://$destinationBucketName/$envFileKey\\\"\\nfi\\n              \"\n      ]\n    },\n    \"post_build\": {\n      \"commands\": [\n        \"echo Build completed on `date`\",\n        \"\\nSTATUS='SUCCESS'\\nif [ $CODEBUILD_BUILD_SUCCEEDING -ne 1 ] # Test if the build is failing\\nthen\\nSTATUS='FAILED'\\nREASON=\\\"NodejsBuild failed. See CloudWatch Log stream for the detailed reason: \\nhttps://$AWS_REGION.console.aws.amazon.com/cloudwatch/home?region=$AWS_REGION#logsV2:log-groups/log-group/\\\\$252Faws\\\\$252Fcodebuild\\\\$252F$projectName/log-events/$CODEBUILD_LOG_PATH\\\"\\nfi\\ncat <<EOF > payload.json\\n{\\n  \\\"StackId\\\": \\\"$stackId\\\",\\n  \\\"RequestId\\\": \\\"$requestId\\\",\\n  \\\"LogicalResourceId\\\":\\\"$logicalResourceId\\\",\\n  \\\"PhysicalResourceId\\\": \\\"$logicalResourceId\\\",\\n  \\\"Status\\\": \\\"$STATUS\\\",\\n  \\\"Reason\\\": \\\"$REASON\\\",\\n  \\\"Data\\\": {\\n    \\\"destinationObjectKey\\\": \\\"$destinationObjectKey\\\",\\n    \\\"envFileKey\\\": \\\"$envFileKey\\\"\\n  }\\n}\\nEOF\\ncurl -i -X PUT -H 'Content-Type:' -d \\\"@payload.json\\\" \\\"$responseURL\\\"\\n              \"\n      ]\n    }\n  }\n}",
      "Type": "NO_SOURCE"
     }
    }
@@ -1312,12 +1312,12 @@
     "CloudDuckBuildDE893DB8"
    ]
   },
-  "CloudDuckBuildDeployCustomResourceB782F9CA": {
+  "CloudDuckBuildDeployCustomResource512MiBBE8101E7": {
    "Type": "Custom::CDKBucketDeployment",
    "Properties": {
     "ServiceToken": {
      "Fn::GetAtt": [
-      "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536",
+      "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiB6723FB92",
       "Arn"
      ]
     },
@@ -1412,7 +1412,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "aa47254059d94cff79a1f8a5a97c4e8a0e14a3f105d2b089464c0beeeb6cfe8d.zip"
+     "S3Key": "29bea96356a8ba5cfb914a321f9e30fd1a384a9c884fa560ea9192f6072df21b.zip"
     },
     "Handler": "index.handler",
     "Role": {
@@ -1421,7 +1421,7 @@
       "Arn"
      ]
     },
-    "Runtime": "nodejs18.x",
+    "Runtime": "nodejs22.x",
     "Timeout": 300
    },
    "DependsOn": [
@@ -1429,7 +1429,7 @@
     "NodejsBuildCustomResourceHandler25648b212c404f09aa65b6bbb0c44659ServiceRoleCB01FBE6"
    ]
   },
-  "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265": {
+  "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiBServiceRoleBA21DBC1": {
    "Type": "AWS::IAM::Role",
    "Properties": {
     "AssumeRolePolicyDocument": {
@@ -1460,7 +1460,7 @@
     ]
    }
   },
-  "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF": {
+  "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiBServiceRoleDefaultPolicy96C3E726": {
    "Type": "AWS::IAM::Policy",
    "Properties": {
     "PolicyDocument": {
@@ -1554,15 +1554,15 @@
      ],
      "Version": "2012-10-17"
     },
-    "PolicyName": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF",
+    "PolicyName": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiBServiceRoleDefaultPolicy96C3E726",
     "Roles": [
      {
-      "Ref": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265"
+      "Ref": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiBServiceRoleBA21DBC1"
      }
     ]
    }
   },
-  "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536": {
+  "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiB6723FB92": {
    "Type": "AWS::Lambda::Function",
    "Properties": {
     "Code": {
@@ -1582,9 +1582,10 @@
       "Ref": "CloudDuckBuildDeployAwsCliLayerDCBC30A4"
      }
     ],
+    "MemorySize": 512,
     "Role": {
      "Fn::GetAtt": [
-      "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265",
+      "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiBServiceRoleBA21DBC1",
       "Arn"
      ]
     },
@@ -1592,8 +1593,8 @@
     "Timeout": 900
    },
    "DependsOn": [
-    "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF",
-    "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265"
+    "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiBServiceRoleDefaultPolicy96C3E726",
+    "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiBServiceRoleBA21DBC1"
    ]
   }
  },

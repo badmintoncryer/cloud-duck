@@ -317,7 +317,7 @@
                 },
                 "constructInfo": {
                   "fqn": "constructs.Construct",
-                  "version": "10.0.5"
+                  "version": "10.5.1"
                 }
               },
               "Api": {
@@ -1211,7 +1211,7 @@
                               "s3Bucket": {
                                 "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
                               },
-                              "s3Key": "6646c8c7e41bc3d652a926516bcb0b761bc2573b255c4a58b3197713cfd9215b.zip"
+                              "s3Key": "a92e3bb882c9cdedd9389b90aab52ce271105ac2f59eba7b6e6050089a3efc42.zip"
                             },
                             "environment": {
                               "variables": {
@@ -1268,7 +1268,7 @@
                 },
                 "constructInfo": {
                   "fqn": "constructs.Construct",
-                  "version": "10.0.5"
+                  "version": "10.5.1"
                 }
               },
               "HostingBucket": {
@@ -1287,7 +1287,7 @@
                             "value": "true"
                           },
                           {
-                            "key": "aws-cdk:cr-owned:1f681077",
+                            "key": "aws-cdk:cr-owned:b5a17cfa",
                             "value": "true"
                           }
                         ]
@@ -1476,7 +1476,7 @@
                     },
                     "constructInfo": {
                       "fqn": "constructs.Construct",
-                      "version": "10.0.5"
+                      "version": "10.5.1"
                     }
                   },
                   "Resource": {
@@ -1792,7 +1792,7 @@
                             },
                             "source": {
                               "type": "NO_SOURCE",
-                              "buildSpec": "{\n  \"version\": \"0.2\",\n  \"env\": {\n    \"shell\": \"bash\"\n  },\n  \"phases\": {\n    \"install\": {\n      \"runtime-versions\": {\n        \"nodejs\": 18\n      }\n    },\n    \"build\": {\n      \"commands\": [\n        \"current_dir=$(pwd)\",\n        \"\\necho \\\"$input\\\"\\nfor obj in $(echo \\\"$input\\\" | jq -r '.[] | @base64'); do\\n  decoded=$(echo \\\"$obj\\\" | base64 --decode)\\n  assetUrl=$(echo \\\"$decoded\\\" | jq -r '.assetUrl')\\n  extractPath=$(echo \\\"$decoded\\\" | jq -r '.extractPath')\\n  commands=$(echo \\\"$decoded\\\" | jq -r '.commands')\\n\\n  # Download the zip file\\n  aws s3 cp \\\"$assetUrl\\\" temp.zip\\n\\n  # Extract the zip file to the extractPath directory\\n  mkdir -p \\\"$extractPath\\\"\\n  unzip temp.zip -d \\\"$extractPath\\\"\\n\\n  # Remove the zip file\\n  rm temp.zip\\n\\n  # Run the specified commands in the extractPath directory\\n  cd \\\"$extractPath\\\"\\n  ls -la\\n  eval \\\"$commands\\\"\\n  cd \\\"$current_dir\\\"\\n  ls -la\\ndone\\n              \",\n        \"ls -la\",\n        \"cd \\\"$workingDirectory\\\"\",\n        \"eval \\\"$buildCommands\\\"\",\n        \"ls -la\",\n        \"cd \\\"$current_dir\\\"\",\n        \"cd \\\"$outputSourceDirectory\\\"\",\n        \"zip -r output.zip ./\",\n        \"aws s3 cp output.zip \\\"s3://$destinationBucketName/$destinationObjectKey\\\"\",\n        \"\\nif [[ $outputEnvFile == \\\"true\\\" ]]\\nthen\\n  # Split the comma-separated string into an array\\n  for var_name in ${envNames//,/ }\\n  do\\n      echo \\\"Element: $var_name\\\"\\n      var_value=\\\"${!var_name}\\\"\\n      echo \\\"$var_name=$var_value\\\" >> tmp.env\\n  done\\n\\n  aws s3 cp tmp.env \\\"s3://$destinationBucketName/$envFileKey\\\"\\nfi\\n              \"\n      ]\n    },\n    \"post_build\": {\n      \"commands\": [\n        \"echo Build completed on `date`\",\n        \"\\nSTATUS='SUCCESS'\\nif [ $CODEBUILD_BUILD_SUCCEEDING -ne 1 ] # Test if the build is failing\\nthen\\nSTATUS='FAILED'\\nREASON=\\\"NodejsBuild failed. See CloudWatch Log stream for the detailed reason: \\nhttps://$AWS_REGION.console.aws.amazon.com/cloudwatch/home?region=$AWS_REGION#logsV2:log-groups/log-group/\\\\$252Faws\\\\$252Fcodebuild\\\\$252F$projectName/log-events/$CODEBUILD_LOG_PATH\\\"\\nfi\\ncat <<EOF > payload.json\\n{\\n  \\\"StackId\\\": \\\"$stackId\\\",\\n  \\\"RequestId\\\": \\\"$requestId\\\",\\n  \\\"LogicalResourceId\\\":\\\"$logicalResourceId\\\",\\n  \\\"PhysicalResourceId\\\": \\\"$logicalResourceId\\\",\\n  \\\"Status\\\": \\\"$STATUS\\\",\\n  \\\"Reason\\\": \\\"$REASON\\\",\\n  \\\"Data\\\": {\\n    \\\"destinationObjectKey\\\": \\\"$destinationObjectKey\\\",\\n    \\\"envFileKey\\\": \\\"$envFileKey\\\"\\n  }\\n}\\nEOF\\ncurl -v -i -X PUT -H 'Content-Type:' -d \\\"@payload.json\\\" \\\"$responseURL\\\"\\n              \"\n      ]\n    }\n  }\n}"
+                              "buildSpec": "{\n  \"version\": \"0.2\",\n  \"env\": {\n    \"shell\": \"bash\"\n  },\n  \"phases\": {\n    \"install\": {\n      \"runtime-versions\": {\n        \"nodejs\": 18\n      }\n    },\n    \"build\": {\n      \"commands\": [\n        \"current_dir=$(pwd)\",\n        \"\\necho \\\"$input\\\"\\nfor obj in $(echo \\\"$input\\\" | jq -r '.[] | @base64'); do\\n  decoded=$(echo \\\"$obj\\\" | base64 --decode)\\n  assetUrl=$(echo \\\"$decoded\\\" | jq -r '.assetUrl')\\n  extractPath=$(echo \\\"$decoded\\\" | jq -r '.extractPath')\\n  commands=$(echo \\\"$decoded\\\" | jq -r '.commands')\\n\\n  # Download the zip file\\n  aws s3 cp \\\"$assetUrl\\\" temp.zip\\n\\n  # Extract the zip file to the extractPath directory\\n  mkdir -p \\\"$extractPath\\\"\\n  unzip temp.zip -d \\\"$extractPath\\\"\\n\\n  # Remove the zip file\\n  rm temp.zip\\n\\n  # Run the specified commands in the extractPath directory\\n  cd \\\"$extractPath\\\"\\n  ls -la\\n  eval \\\"$commands\\\"\\n  cd \\\"$current_dir\\\"\\n  ls -la\\ndone\\n              \",\n        \"ls -la\",\n        \"cd \\\"$workingDirectory\\\"\",\n        \"eval \\\"$buildCommands\\\"\",\n        \"ls -la\",\n        \"cd \\\"$current_dir\\\"\",\n        \"cd \\\"$outputSourceDirectory\\\"\",\n        \"zip -r output.zip ./\",\n        \"aws s3 cp output.zip \\\"s3://$destinationBucketName/$destinationObjectKey\\\"\",\n        \"\\nif [[ $outputEnvFile == \\\"true\\\" ]]\\nthen\\n  # Split the comma-separated string into an array\\n  for var_name in ${envNames//,/ }\\n  do\\n      echo \\\"Element: $var_name\\\"\\n      var_value=\\\"${!var_name}\\\"\\n      echo \\\"$var_name=$var_value\\\" >> tmp.env\\n  done\\n\\n  aws s3 cp tmp.env \\\"s3://$destinationBucketName/$envFileKey\\\"\\nfi\\n              \"\n      ]\n    },\n    \"post_build\": {\n      \"commands\": [\n        \"echo Build completed on `date`\",\n        \"\\nSTATUS='SUCCESS'\\nif [ $CODEBUILD_BUILD_SUCCEEDING -ne 1 ] # Test if the build is failing\\nthen\\nSTATUS='FAILED'\\nREASON=\\\"NodejsBuild failed. See CloudWatch Log stream for the detailed reason: \\nhttps://$AWS_REGION.console.aws.amazon.com/cloudwatch/home?region=$AWS_REGION#logsV2:log-groups/log-group/\\\\$252Faws\\\\$252Fcodebuild\\\\$252F$projectName/log-events/$CODEBUILD_LOG_PATH\\\"\\nfi\\ncat <<EOF > payload.json\\n{\\n  \\\"StackId\\\": \\\"$stackId\\\",\\n  \\\"RequestId\\\": \\\"$requestId\\\",\\n  \\\"LogicalResourceId\\\":\\\"$logicalResourceId\\\",\\n  \\\"PhysicalResourceId\\\": \\\"$logicalResourceId\\\",\\n  \\\"Status\\\": \\\"$STATUS\\\",\\n  \\\"Reason\\\": \\\"$REASON\\\",\\n  \\\"Data\\\": {\\n    \\\"destinationObjectKey\\\": \\\"$destinationObjectKey\\\",\\n    \\\"envFileKey\\\": \\\"$envFileKey\\\"\\n  }\\n}\\nEOF\\ncurl -i -X PUT -H 'Content-Type:' -d \\\"@payload.json\\\" \\\"$responseURL\\\"\\n              \"\n      ]\n    }\n  }\n}"
                             }
                           }
                         },
@@ -1919,13 +1919,13 @@
                           "version": "2.160.0"
                         }
                       },
-                      "CustomResource": {
-                        "id": "CustomResource",
-                        "path": "TestStack/CloudDuck/Build/Deploy/CustomResource",
+                      "CustomResource-512MiB": {
+                        "id": "CustomResource-512MiB",
+                        "path": "TestStack/CloudDuck/Build/Deploy/CustomResource-512MiB",
                         "children": {
                           "Default": {
                             "id": "Default",
-                            "path": "TestStack/CloudDuck/Build/Deploy/CustomResource/Default",
+                            "path": "TestStack/CloudDuck/Build/Deploy/CustomResource-512MiB/Default",
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.CfnResource",
                               "version": "2.160.0"
@@ -1946,7 +1946,7 @@
                 },
                 "constructInfo": {
                   "fqn": "deploy-time-build.NodejsBuild",
-                  "version": "0.3.23"
+                  "version": "0.3.50"
                 }
               },
               "DistributionUrl": {
@@ -1960,7 +1960,7 @@
             },
             "constructInfo": {
               "fqn": "constructs.Construct",
-              "version": "10.0.5"
+              "version": "10.5.1"
             }
           },
           "NodejsBuildCustomResourceHandler25648b212c404f09aa65b6bbb0c44659": {
@@ -2104,7 +2104,7 @@
                       "s3Bucket": {
                         "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
                       },
-                      "s3Key": "aa47254059d94cff79a1f8a5a97c4e8a0e14a3f105d2b089464c0beeeb6cfe8d.zip"
+                      "s3Key": "29bea96356a8ba5cfb914a321f9e30fd1a384a9c884fa560ea9192f6072df21b.zip"
                     },
                     "handler": "index.handler",
                     "role": {
@@ -2113,7 +2113,7 @@
                         "Arn"
                       ]
                     },
-                    "runtime": "nodejs18.x",
+                    "runtime": "nodejs22.x",
                     "timeout": 300
                   }
                 },
@@ -2128,17 +2128,17 @@
               "version": "2.160.0"
             }
           },
-          "Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C": {
-            "id": "Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C",
-            "path": "TestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C",
+          "Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiB": {
+            "id": "Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiB",
+            "path": "TestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiB",
             "children": {
               "ServiceRole": {
                 "id": "ServiceRole",
-                "path": "TestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole",
+                "path": "TestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiB/ServiceRole",
                 "children": {
                   "ImportServiceRole": {
                     "id": "ImportServiceRole",
-                    "path": "TestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/ImportServiceRole",
+                    "path": "TestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiB/ServiceRole/ImportServiceRole",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
                       "version": "2.160.0"
@@ -2146,7 +2146,7 @@
                   },
                   "Resource": {
                     "id": "Resource",
-                    "path": "TestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/Resource",
+                    "path": "TestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiB/ServiceRole/Resource",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::IAM::Role",
                       "aws:cdk:cloudformation:props": {
@@ -2185,11 +2185,11 @@
                   },
                   "DefaultPolicy": {
                     "id": "DefaultPolicy",
-                    "path": "TestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy",
+                    "path": "TestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiB/ServiceRole/DefaultPolicy",
                     "children": {
                       "Resource": {
                         "id": "Resource",
-                        "path": "TestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy/Resource",
+                        "path": "TestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiB/ServiceRole/DefaultPolicy/Resource",
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
                           "aws:cdk:cloudformation:props": {
@@ -2284,10 +2284,10 @@
                               ],
                               "Version": "2012-10-17"
                             },
-                            "policyName": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF",
+                            "policyName": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiBServiceRoleDefaultPolicy96C3E726",
                             "roles": [
                               {
-                                "Ref": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265"
+                                "Ref": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiBServiceRoleBA21DBC1"
                               }
                             ]
                           }
@@ -2311,11 +2311,11 @@
               },
               "Code": {
                 "id": "Code",
-                "path": "TestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/Code",
+                "path": "TestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiB/Code",
                 "children": {
                   "Stage": {
                     "id": "Stage",
-                    "path": "TestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/Code/Stage",
+                    "path": "TestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiB/Code/Stage",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.AssetStaging",
                       "version": "2.160.0"
@@ -2323,7 +2323,7 @@
                   },
                   "AssetBucket": {
                     "id": "AssetBucket",
-                    "path": "TestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/Code/AssetBucket",
+                    "path": "TestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiB/Code/AssetBucket",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_s3.BucketBase",
                       "version": "2.160.0"
@@ -2337,7 +2337,7 @@
               },
               "Resource": {
                 "id": "Resource",
-                "path": "TestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/Resource",
+                "path": "TestStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiB/Resource",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
                   "aws:cdk:cloudformation:props": {
@@ -2358,9 +2358,10 @@
                         "Ref": "CloudDuckBuildDeployAwsCliLayerDCBC30A4"
                       }
                     ],
+                    "memorySize": 512,
                     "role": {
                       "Fn::GetAtt": [
-                        "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265",
+                        "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C512MiBServiceRoleBA21DBC1",
                         "Arn"
                       ]
                     },
@@ -2414,7 +2415,7 @@
                 "path": "Test/DefaultTest/Default",
                 "constructInfo": {
                   "fqn": "constructs.Construct",
-                  "version": "10.0.5"
+                  "version": "10.5.1"
                 }
               },
               "DeployAssert": {
@@ -2460,7 +2461,7 @@
         "path": "Tree",
         "constructInfo": {
           "fqn": "constructs.Construct",
-          "version": "10.0.5"
+          "version": "10.5.1"
         }
       }
     },
