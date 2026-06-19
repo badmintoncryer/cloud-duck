@@ -69,7 +69,7 @@ export class Api extends Construct {
     });
 
     const duckdbHandler = new lambda.Function(this, 'DuckDbHandler', {
-      runtime: lambda.Runtime.NODEJS_20_X,
+      runtime: lambda.Runtime.NODEJS_22_X,
       code: lambda.Code.fromAsset(path.join(__dirname, '../../../lambda/duckdb/build')),
       handler: 'index.handler',
       timeout: Duration.minutes(15),
