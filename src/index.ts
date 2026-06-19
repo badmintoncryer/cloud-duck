@@ -1,11 +1,11 @@
 import * as path from 'node:path';
+import { NodejsBuild } from '@cdklabs/deploy-time-build';
 import { CfnOutput, Lazy, RemovalPolicy, Size, Stack } from 'aws-cdk-lib';
 import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
 import * as origins from 'aws-cdk-lib/aws-cloudfront-origins';
 import * as cognito from 'aws-cdk-lib/aws-cognito';
 import * as s3 from 'aws-cdk-lib/aws-s3';
 import { Construct } from 'constructs';
-import { NodejsBuild } from 'deploy-time-build';
 import { Api } from './constructs/api';
 import { Cognito } from './constructs/cognito';
 
@@ -71,6 +71,11 @@ export class CloudDuck extends Construct {
     distributionDomainName = distribution.distributionDomainName;
 
     new NodejsBuild(this, 'Build', {
+      // @cdklabs/deploy-time-build made nodejsVersion required (the former
+      // deploy-time-build package defaulted it to 18). Pin to 18 to keep the
+      // generated CodeBuild buildspec — and thus the synthesized template —
+      // identical for existing consumers.
+      nodejsVersion: 18,
       assets: [
         {
           path: path.join(__dirname, '../frontend'),

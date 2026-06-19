@@ -69,7 +69,7 @@
     "constructs": "^10.5.1"
   },
   "dependencies": {
-    "deploy-time-build": "^0.3.50"
+    "@cdklabs/deploy-time-build": "^0.1.5"
   },
   "pnpm": {},
   "keywords": [

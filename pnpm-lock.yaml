@@ -8,9 +8,9 @@ importers:
 
   .:
     dependencies:
-      deploy-time-build:
-        specifier: ^0.3.50
-        version: 0.3.50(aws-cdk-lib@2.197.0(constructs@10.5.1))(constructs@10.5.1)
+      '@cdklabs/deploy-time-build':
+        specifier: ^0.1.5
+        version: 0.1.5(aws-cdk-lib@2.197.0(constructs@10.5.1))(constructs@10.5.1)
     devDependencies:
       '@aws-cdk/integ-runner':
         specifier: 2.197.2
@@ -394,6 +394,13 @@ packages:
 
   '@bcoe/v8-coverage@0.2.3':
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
+
+  '@cdklabs/deploy-time-build@0.1.5':
+    resolution: {integrity: sha512-u+9x4o9CGUTXFiHo1Z1hP9VGcVbV4Fgjh/n5iPgkVdRJ/WXpUabr3UqbRvHzi5M964Gg8VtXTTGtVXQlXWSdwg==}
+    engines: {node: '>= 18.12.0'}
+    peerDependencies:
+      aws-cdk-lib: ^2.38.0
+      constructs: ^10.5.1
 
   '@cdklabs/tskb@0.0.4':
     resolution: {integrity: sha512-NFx1X0l7p5DyHtLLEyNeh1hPN4UN9hTkZkzFs/Mp+kFk7dpdINGmGVpCfRDjJ2DrcNSNENUmT+w8g73TvmBbTw==}
@@ -1531,13 +1538,6 @@ packages:
   define-properties@1.2.1:
     resolution: {integrity: sha512-8QmQKqEASLd5nx0U1B1okLElbUuuttJ/AnYmRXbbbGDWh6uS208EjD4Xqq/I9wK7u0v6O08XhTWnt5XtEbR6Dg==}
     engines: {node: '>= 0.4'}
-
-  deploy-time-build@0.3.50:
-    resolution: {integrity: sha512-IePWjx2E2SiCpwl4pWBgLHMzGUBTo/Wtx80MRRUFRMgl1YAxkhfc90U/DyBpJuoOo/xUqy9lRWM3UOyh9+QyuQ==}
-    deprecated: This package has been moved to @cdklabs/deploy-time-build. Please install @cdklabs/deploy-time-build instead. For migration details, see https://github.com/cdklabs/deploy-time-build/issues/59
-    peerDependencies:
-      aws-cdk-lib: ^2.38.0
-      constructs: ^10.0.5
 
   detect-indent@5.0.0:
     resolution: {integrity: sha512-rlpvsxUtM0PQvy9iZe640/IWwWYyBsTApREbA1pHOpmOUIl9MkP/U4z7vTtg4Oaojvqhxt7sdufnT0EzGaR31g==}
@@ -3859,6 +3859,11 @@ snapshots:
 
   '@bcoe/v8-coverage@0.2.3': {}
 
+  '@cdklabs/deploy-time-build@0.1.5(aws-cdk-lib@2.197.0(constructs@10.5.1))(constructs@10.5.1)':
+    dependencies:
+      aws-cdk-lib: 2.197.0(constructs@10.5.1)
+      constructs: 10.5.1
+
   '@cdklabs/tskb@0.0.4': {}
 
   '@cspotcode/source-map-support@0.8.1':
@@ -5085,11 +5090,6 @@ snapshots:
       define-data-property: 1.1.4
       has-property-descriptors: 1.0.2
       object-keys: 1.1.1
-
-  deploy-time-build@0.3.50(aws-cdk-lib@2.197.0(constructs@10.5.1))(constructs@10.5.1):
-    dependencies:
-      aws-cdk-lib: 2.197.0(constructs@10.5.1)
-      constructs: 10.5.1
 
   detect-indent@5.0.0: {}
 
