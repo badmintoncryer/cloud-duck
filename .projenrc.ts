@@ -11,7 +11,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   repositoryUrl: 'https://github.com/badmintoncryer/cloud-duck.git',
   keywords: ['aws', 'cdk', 's3', 'duckdb', 'cognito', 'lambda', 'api-gateway', 'frontend'],
   gitignore: ['*.js', '*.d.ts', '!test/*.snapshot/**/*', '.tmp', '!remix.config.js', '!postcss.config.js'],
-  deps: ['deploy-time-build'],
+  deps: ['@cdklabs/deploy-time-build'],
   description: 'CDK construct for creating an analysis environment using DuckDB for S3 data',
   devDeps: [
     '@aws-cdk/integ-runner@2.197.2',
