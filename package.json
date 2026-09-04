@@ -8,6 +8,7 @@
   "scripts": {
     "build": "projen build",
     "bump": "projen bump",
+    "bump:releasable-commits": "projen bump:releasable-commits",
     "clobber": "projen clobber",
     "compat": "projen compat",
     "compile": "projen compile",
@@ -38,29 +39,29 @@
   "devDependencies": {
     "@aws-cdk/integ-runner": "2.197.2",
     "@aws-cdk/integ-tests-alpha": "2.197.0-alpha.0",
-    "@aws-sdk/client-s3": "^3.1072.0",
+    "@aws-sdk/client-s3": "^3.1126.0",
     "@stylistic/eslint-plugin": "^2",
-    "@types/aws-lambda": "^8.10.162",
+    "@types/aws-lambda": "^8.10.163",
     "@types/jest": "^29.5.14",
-    "@types/node": "^22.19.21",
+    "@types/node": "^22.20.1",
     "@typescript-eslint/eslint-plugin": "^8",
     "@typescript-eslint/parser": "^8",
     "aws-cdk-lib": "2.197.0",
     "commit-and-tag-version": "^12",
     "constructs": "10.5.1",
-    "esbuild": "^0.28.1",
+    "esbuild": "^0.28.2",
     "eslint": "^9",
     "eslint-import-resolver-typescript": "^3.10.1",
     "eslint-plugin-import": "^2.32.0",
     "jest": "^29.7.0",
     "jest-junit": "^17",
     "jsii": "~5.9.0",
-    "jsii-diff": "^1.136.0",
+    "jsii-diff": "^1.140.0",
     "jsii-docgen": "^10.5.0",
-    "jsii-pacmak": "^1.136.0",
+    "jsii-pacmak": "^1.140.0",
     "jsii-rosetta": "~5.9.0",
-    "projen": "^0.100.0",
-    "ts-jest": "^29.4.11",
+    "projen": "^0.103.18",
+    "ts-jest": "^29.4.12",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   },
@@ -69,7 +70,7 @@
     "constructs": "^10.5.1"
   },
   "dependencies": {
-    "@cdklabs/deploy-time-build": "^0.1.5"
+    "@cdklabs/deploy-time-build": "^0.1.7"
   },
   "pnpm": {},
   "keywords": [
@@ -137,7 +138,7 @@
       "^.+\\.[t]sx?$": [
         "ts-jest",
         {
-          "tsconfig": "tsconfig.dev.json"
+          "tsconfig": "test/tsconfig.json"
         }
       ]
     }
