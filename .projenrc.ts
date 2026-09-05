@@ -26,7 +26,8 @@ const project = new awscdk.AwsCdkConstructLibrary({
     exclude: ['frontend/**/*', 'test/*.snapshot/**/*', 'node_modules'],
   },
   tsconfigDev: {
-    exclude: ['frontend/**/*', 'test/*.snapshot/**/*', 'node_modules'],
+    // projen now emits this as test/tsconfig.json, so the globs are relative to test/
+    exclude: ['*.snapshot/**/*', 'node_modules'],
   },
   eslint: true,
   eslintOptions: {
@@ -44,6 +45,6 @@ project.projectBuild.compileTask.prependExec('npm ci && npm run build', {
   cwd: 'lambda/duckdb',
 });
 project.projectBuild.testTask.exec(
-  'pnpm tsc -p tsconfig.dev.json && pnpm integ-runner',
+  'pnpm tsc -p test/tsconfig.json --noEmit false --outDir . && pnpm integ-runner',
 );
 project.synth();
