@@ -343,7 +343,7 @@
           "spawn": "eslint"
         },
         {
-          "exec": "pnpm tsc -p tsconfig.dev.json && pnpm integ-runner"
+          "exec": "pnpm tsc -p test/tsconfig.json --noEmit false --outDir . && pnpm integ-runner"
         }
       ]
     },

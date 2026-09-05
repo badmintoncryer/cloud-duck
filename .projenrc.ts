@@ -44,6 +44,6 @@ project.projectBuild.compileTask.prependExec('npm ci && npm run build', {
   cwd: 'lambda/duckdb',
 });
 project.projectBuild.testTask.exec(
-  'pnpm tsc -p tsconfig.dev.json && pnpm integ-runner',
+  'pnpm tsc -p test/tsconfig.json --noEmit false --outDir . && pnpm integ-runner',
 );
 project.synth();
