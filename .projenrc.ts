@@ -26,7 +26,8 @@ const project = new awscdk.AwsCdkConstructLibrary({
     exclude: ['frontend/**/*', 'test/*.snapshot/**/*', 'node_modules'],
   },
   tsconfigDev: {
-    exclude: ['frontend/**/*', 'test/*.snapshot/**/*', 'node_modules'],
+    // projen now emits this as test/tsconfig.json, so the globs are relative to test/
+    exclude: ['*.snapshot/**/*', 'node_modules'],
   },
   eslint: true,
   eslintOptions: {
