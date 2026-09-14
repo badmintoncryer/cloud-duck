@@ -20,5 +20,8 @@
   },
   "files": [
     "build/index.js"
-  ]
+  ],
+  "overrides": {
+    "fast-xml-parser": "^4.5.4"
+  }
 }
