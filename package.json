@@ -39,15 +39,15 @@
   "devDependencies": {
     "@aws-cdk/integ-runner": "2.197.2",
     "@aws-cdk/integ-tests-alpha": "2.197.0-alpha.0",
-    "@aws-sdk/client-s3": "^3.1126.0",
+    "@aws-sdk/client-s3": "^3.1141.0",
     "@stylistic/eslint-plugin": "^2",
     "@types/aws-lambda": "^8.10.163",
     "@types/jest": "^29.5.14",
-    "@types/node": "^22.20.1",
+    "@types/node": "^22.20.4",
     "@typescript-eslint/eslint-plugin": "^8",
     "@typescript-eslint/parser": "^8",
     "aws-cdk-lib": "2.197.0",
-    "commit-and-tag-version": "^12",
+    "commit-and-tag-version": "^13",
     "constructs": "10.5.1",
     "esbuild": "^0.28.2",
     "eslint": "^9",
@@ -60,8 +60,8 @@
     "jsii-docgen": "^10.5.0",
     "jsii-pacmak": "^1.140.0",
     "jsii-rosetta": "~5.9.0",
-    "projen": "^0.103.18",
-    "ts-jest": "^29.4.12",
+    "projen": "^0.103.27",
+    "ts-jest": "^29.4.14",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   },
@@ -70,7 +70,7 @@
     "constructs": "^10.5.1"
   },
   "dependencies": {
-    "@cdklabs/deploy-time-build": "^0.1.7"
+    "@cdklabs/deploy-time-build": "^0.1.10"
   },
   "pnpm": {},
   "keywords": [
