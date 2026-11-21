@@ -46,6 +46,8 @@
     "*.generated.ts",
     "coverage",
     "test/*.snapshot/**/*",
+    "frontend/**/*.ts",
+    "test/.*.snapshot/**/*",
     "!.projenrc.ts",
     "!projenrc/**/*.ts"
   ],
